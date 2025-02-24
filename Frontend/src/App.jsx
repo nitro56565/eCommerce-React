@@ -1,10 +1,16 @@
 import './App.css'
+import HeroSection from './components/HeroSection'
+import MainContent from './components/MainContent'
+import Navbar from './components/Navbar'
 
 function App() {
 
   return (
     <>
-    <h1 className='italic'>Implement Routing here</h1>
+      
+      <Navbar />
+      <HeroSection/>
+      <MainContent/>
     </>
   )
 }
