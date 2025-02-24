@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './Components/Footer';
 import InstaLink from './Components/InstaLink';
 import Blogs from './Components/Blogs';
+
 function App() {
 
   return (
