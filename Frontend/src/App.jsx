@@ -1,10 +1,14 @@
 import './App.css'
-
+import Footer from './Components/Footer';
+import InstaLink from './Components/InstaLink';
+import Blogs from './Components/Blogs';
 function App() {
 
   return (
     <>
-    <h1 className='italic'>Implement Routing here</h1>
+    <Blogs/>
+    <InstaLink></InstaLink>
+    <Footer></Footer>
     </>
   )
 }
