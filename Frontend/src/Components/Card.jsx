@@ -1,19 +1,42 @@
+// import React from 'react'
+
+// const Card = ({ product }) => {
+//     return (
+//         <div>
+//             <div className='w-[287px] h-[397px] space-y-4 border'>
+//                 <div className='flex justify-center overflow-hidden'>
+//                     <img src={product.image} alt="" className='object-cover'/>
+//                 </div>
+//                 <div className='w-[199px] p-2 flex flex-col space-y-3   '>
+//                     <p className='font-normal'>{product.title}</p>
+//                     <h2 className='font-semibold text-2xl'>Rs. {product.price}</h2>
+//                 </div>
+//             </div>
+
+
+//         </div>
+//     )
+// }
+
+// export default Card
+
+
 import React from 'react'
 
-const Card = ({ product }) => {
+
+const Card = ({ product, onClick }) => {
     return (
-        <div>
-            <div className='w-[287px] h-[397px] space-y-4'>
-                <div className='flex justify-center'>
-                    <img src={product.image} alt="" />
-                </div>
-                <div className='w-[199px] p-2 flex flex-col space-y-3   '>
-                    <p className='font-normal'>{product.name}</p>
-                    <h2 className='font-semibold text-2xl'>{product.price}</h2>
-                </div>
+        <div className="w-[287px] h-[397px]  space-y-4 rounded transition-shadow duration-300 hover:shadow-lg hover:shadow-gray-400" onClick={onClick}>
+         
+            <div className="w-full h-60 flex justify-center items-center overflow-hidden">
+                <img src={product.image} alt="" className="w-full h-full object-contain" />
             </div>
 
-
+            
+            <div className="w-full p-2 flex flex-col space-y-3">
+                <p className="font-normal line-clamp-2">{product.title}</p>
+                <h2 className="font-semibold text-2xl">$ {product.price}</h2>
+            </div>
         </div>
     )
 }
