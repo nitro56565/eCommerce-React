@@ -1,7 +1,7 @@
-import React from 'react'
-import Card from './Card'
-import { ProductsData } from '../../public/assets/products'
-import Button from './Button'
+import React from 'react';
+import Card from './Card';
+import { ProductsData } from '../../public/assets/products';
+import Button from "../components/Button";
 
 const SecondSection = () => {
     return (
