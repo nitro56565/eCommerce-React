@@ -13,6 +13,7 @@ import Login from './Components/Login';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react';
 import Catalogue from './Components/Catalogue';
+import { CountProvider } from './context/CountContext';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <>
-     
+     <CountProvider>
       {/* <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home handleLogin={handleLogin}/>}></Route>
@@ -31,9 +32,10 @@ function App() {
       </Routes>
     </BrowserRouter> */}
     <Catalogue/>
+    </CountProvider>
 
     </>
   )
 }
-
+    
 export default App
