@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCountContext } from '../context/CountContext';
+import { useCountContext } from '../hooks/UseCountContext';
 
 const SidebarCart = ({ onClose }) => {
     const { cartItems } = useCountContext(); 
