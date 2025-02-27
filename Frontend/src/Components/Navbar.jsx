@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
-import { Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 
 const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+    
+    // Check if the current route is '/dashboard'
+    const isDashboard = location.pathname === "/dashboard";
+
 
     return (
-        <div className='h-[100px] bg-[#FBEBB5] flex items-center '>
+        <div className={`h-[100px] ${isDashboard ? "bg-[#FBEBB5]" : "bg-white"} flex items-center `}>
 
             <div className='flex-1 flex justify-center h-[24px] md:ml-16'>
                 <div className='flex gap-4 md:gap-[50px] text-center'>
