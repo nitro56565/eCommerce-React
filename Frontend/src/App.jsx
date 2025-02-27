@@ -13,6 +13,7 @@ import Login from './Components/Login';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react';
 import Catalogue from './Components/Catalogue';
+import { CountProvider } from './hooks/UseCountContext';
 
 
 function App() {
@@ -31,9 +32,10 @@ function App() {
       </Routes>
     </BrowserRouter> */}
     <Catalogue/>
+    
 
     </>
   )
 }
-
+    
 export default App
