@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Menu, X } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation , Link} from "react-router-dom";
 
 
 const Navbar = () => {
@@ -11,16 +11,16 @@ const Navbar = () => {
     // Check if the current route is '/dashboard'
     const isDashboard = location.pathname === "/dashboard";
 
-
+    
     return (
         <div className={`h-[100px] ${isDashboard ? "bg-[#FBEBB5]" : "bg-white"} flex items-center `}>
 
             <div className='flex-1 flex justify-center h-[24px] md:ml-16'>
                 <div className='flex gap-4 md:gap-[50px] text-center'>
-                    <div className='font-semibold text-base'>Home</div>
-                    <div className='font-semibold text-base'>Shop</div>
-                    <div className='font-semibold text-base'>About</div>
-                    <div className='font-semibold text-base'>Contact</div>
+                <div className='font-semibold text-base' ><Link to="/" className="no-underline text-black"> Home </Link></div>
+                <div className='font-semibold text-base'><Link to="/shop" className="no-underline text-black">Shop </Link></div>
+                    <div className='font-semibold text-base'><Link to="/" className="no-underline text-black">About </Link></div>
+                    <div className='font-semibold text-base'><Link to="/" className="no-underline text-black">Contact</Link></div>
                 </div>
             </div>
 

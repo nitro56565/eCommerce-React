@@ -3,7 +3,6 @@ import axios from 'axios'
 import Card from '../components/Card'
 import ProductDetails from './ProductDetails'
 import SidebarCart from './SidebarCart'
-import Policies from './Policies'
 import { CountProvider, useCountContext } from '../hooks/UseCountContext'
 
 const CatalogueContent = () => { 
@@ -27,7 +26,7 @@ const CatalogueContent = () => {
     return (
         <>
             <div className='mb-10'>
-                <button
+                <button type='button'
                     onClick={() => setIsCartOpen(true)}
                     className="fixed top-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg"
                 >
@@ -68,7 +67,7 @@ const CatalogueContent = () => {
                     </div>
                 )}
             </div>
-            <Policies />
+        
         </>
     )
 }

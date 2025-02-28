@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
 function Footer(params) {
     return (
@@ -15,10 +16,10 @@ function Footer(params) {
                         <div className="text-left">
                             <h5 className="text-gray-500 font-semibold text-lg mb-3">Links</h5>
                             <ul className="text-gray-500 space-y-2 pl-0">
-                                <li><p className="hover:text-gray-700">Home </p></li>
-                                <li><p className="hover:text-gray-700">Shop</p></li>
-                                <li><p  className="hover:text-gray-700">About</p></li>
-                                <li><p  className="hover:text-gray-700">Contact</p></li>
+                                <li><p className="hover:text-gray-700"><Link to="/" className="no-underline text-black"> Home </Link></p></li>
+                                <li><p className="hover:text-gray-700"><Link to="/shop" className="no-underline text-black"> Shop</Link></p></li>
+                                <li><p  className="hover:text-gray-700"><Link to="/" className="no-underline text-black"> About </Link></p></li>
+                                <li><p  className="hover:text-gray-700"><Link to="/" className="no-underline text-black"> Contact </Link></p></li>
                             </ul>
                         </div>
                         <div>
