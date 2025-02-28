@@ -6,9 +6,11 @@ import Home from './Components/Home';
 import CheckOut from './Components/CheckOut';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react';
-import Catalogue from './Components/Catalogue';
+import ScrollToTop from './Components/ScrollToTop';
 import { CountProvider } from './hooks/UseCountContext';
 import Dashboard from './Components/Dashboard';
+import SidebarCart from './Components/SidebarCart';
+
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
     <>
 
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           <Route path="/" element={<Dashboard/>}></Route>
           {/* <Route path="/dashboard" element={isAuthenticated ? <Catalogue /> : <Navigate to="/login" />} ></Route> */}

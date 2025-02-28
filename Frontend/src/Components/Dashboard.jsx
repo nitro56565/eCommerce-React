@@ -1,7 +1,6 @@
 import React from "react";
 import HeroSection from '../components/HeroSection';
 import MainContent from "../components/MainContent.jsx";
-
 import Navbar from './Navbar'
 import Footer from './Footer';
 import InstaLink from './InstaLink';
