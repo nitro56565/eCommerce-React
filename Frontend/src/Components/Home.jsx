@@ -4,7 +4,7 @@ import Login from './Login'
 import Registration from './Registration'
 import Policies from './Policies'
 
-const Home = ({handleLogin}) => {
+const Home = () => {
     
   return (
     <>
@@ -12,7 +12,7 @@ const Home = ({handleLogin}) => {
 
     <div className='w-full flex flex-row '>
         <div className='w-1/2'>
-        <Login onLogin={handleLogin} />
+        <Login  />
         </div>
         <div className='w-1/2'>
         <Registration/>

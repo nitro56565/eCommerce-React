@@ -14,8 +14,8 @@ import Dashboard from './Components/Dashboard';
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const handleLogin = () => setIsAuthenticated(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const handleLogin = () => setIsAuthenticated(true);
 
 
   return (
