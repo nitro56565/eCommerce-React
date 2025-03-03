@@ -36,7 +36,7 @@ const ProductDetails = ({ product, onClose }) => {
         onClose();
     };
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black ">
+        <div className="fixed inset-0 flex items-center justify-center bg-white ">
 
             <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
                 <button onClick={onClose} type='button' className="absolute top-4 right-4 text-xl">✖</button>
