@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.3",
     "ecommerce-react": "file:",
     "lucide-react": "^0.475.0",
+    "paypal-rest-sdk": "^1.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
