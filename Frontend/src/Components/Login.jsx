@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast"
 
-const Login = ({ onLogin }) => {
+const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        onLogin();
+        // onLogin();
         await axios.post('http://localhost:3000/api/login', { email, password })
             .then(response => {
                 if (response.data.Login) {
