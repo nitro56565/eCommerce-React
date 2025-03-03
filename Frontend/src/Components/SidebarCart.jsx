@@ -3,10 +3,10 @@ import { useCountContext } from '../hooks/UseCountContext';
 import { useNavigate } from 'react-router-dom';
 
 const SidebarCart = ({ onClose }) => {
-    const { cartItems } = useCountContext();
+    const { cartItems, removeFromCart } = useCountContext();
     const navigate = useNavigate();
     const handleRedirect = () => {
-        // Sending only the required fields (title, price, quantity)
+
         const checkoutItems = cartItems.map(item => ({
             title: item.title,
             price: (item.price),
@@ -16,7 +16,7 @@ const SidebarCart = ({ onClose }) => {
         navigate('/checkout', { state: { cart: checkoutItems } });
     };
     return (
-        <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-5 overflow-y-auto transition-transform duration-300 ease-in-out">
+        <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-5 overflow-y-auto transition-transform duration-300 ease-in-out z-10">
             <button onClick={onClose} className="absolute top-4 right-4 text-xl">✖</button>
             <h2 className="text-xl font-semibold mb-4">🛒 Cart Items</h2>
 
@@ -30,9 +30,23 @@ const SidebarCart = ({ onClose }) => {
                             <p className="text-sm">{item.title}</p>
                             <p className="font-semibold">{item.quantity} X $ {item.price}</p>
                         </div>
+
+                        <button
+                            className="text-red-500 font-bold px-2 py-1 text-lg"
+                            onClick={() => {
+                                // console.log("Removing item:", item.id);
+                                removeFromCart(item.id);
+                            }}
+                        >
+                            ✖
+                        </button>
                     </div>
+
+
                 ))
             )}
+
+
 
             {cartItems.length > 0 && (
                 <button className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded"

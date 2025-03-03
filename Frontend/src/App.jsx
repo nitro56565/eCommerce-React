@@ -9,7 +9,7 @@ import { useState } from 'react';
 import ScrollToTop from './Components/ScrollToTop';
 import { CountProvider } from './hooks/UseCountContext';
 import Dashboard from './Components/Dashboard';
-import SidebarCart from './Components/SidebarCart';
+
 
 
 
@@ -20,16 +20,17 @@ function App() {
 
   return (
     <>
-
-      <BrowserRouter>
-      <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Dashboard/>}></Route>
-          {/* <Route path="/dashboard" element={isAuthenticated ? <Catalogue /> : <Navigate to="/login" />} ></Route> */}
-          <Route path='/shop' element={<Shop/>}/>
-          <Route path='/checkout' element={<CheckOut />} />
-      // </Routes>
-      </BrowserRouter>
+      <CountProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Dashboard />}></Route>
+            {/* <Route path="/dashboard" element={isAuthenticated ? <Catalogue /> : <Navigate to="/login" />} ></Route> */}
+            <Route path='/shop' element={<Shop />} />
+            <Route path='/checkout' element={<CheckOut />} />
+       </Routes>
+        </BrowserRouter>
+      </CountProvider>
 
 
     </>

@@ -15,7 +15,7 @@ function ImageHeroSection({ params }) {
             <div className="absolute inset-0 bg-[#FAF4F4] opacity-50"></div>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center">
+            <div className="relative z-0 flex flex-col items-center justify-center">
                 {/* Logo - Centered and Responsive */}
                 <div
                     className="w-12 md:w-16 lg:w-20 h-10 md:h-20 lg:h-20 bg-contain bg-no-repeat bg-center"

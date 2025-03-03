@@ -19,8 +19,12 @@ export const CountProvider = ({ children }) => {
         });
     };
 
+    const removeFromCart = (id) => {
+        setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    };
+
     return (
-        <CountContext.Provider value={{ cartItems, addToCart }}>
+        <CountContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
             {children}
         </CountContext.Provider>
     );

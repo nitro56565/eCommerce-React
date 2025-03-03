@@ -5,9 +5,12 @@ import Navbar from './Navbar'
 import Footer from './Footer';
 import InstaLink from './InstaLink';
 import Blogs from './Blogs';
+import { useCountContext } from "../hooks/UseCountContext.jsx";
 function Dashboard(params) {
+    
+
     return (<>
-        <Navbar />
+        <Navbar  />
         <HeroSection />
         <MainContent />
         <Blogs />

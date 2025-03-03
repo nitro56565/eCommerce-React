@@ -31,20 +31,20 @@ const CatalogueContent = () => {
 
     return (
         <>
-        <Navbar/>
+        {/* <Navbar/> */}
             <div className="text-center text-xs md:text-base font-normal my-4 bg-[#FAF4F4] w-[80%] m-auto p-3">
                 Showing {startItem} - {endItem} of {data.length} results
             </div>
 
             <div className='mb-10'>
-                <button type='button'
+                {/* <button type='button'
                     onClick={() => setIsCartOpen(true)}
                     className="fixed top-5 right-5 bg-[#FFF9E5] text-black px-4 py-2 rounded-full shadow-lg"
                 >
                     🛒 {cartItems.length}
-                </button>
+                </button> */}
 
-                {isCartOpen && <SidebarCart cart={cartItems} onClose={() => setIsCartOpen(false)} />}
+                {/* {isCartOpen && <SidebarCart cart={cartItems} onClose={() => setIsCartOpen(false)} />} */}
 
                 {selectedProduct ? (
                     <ProductDetails
@@ -93,17 +93,16 @@ const CatalogueContent = () => {
 
 
             </div>
-            <Policies />
-            <Footer/>
+        
         </>
     )
 }
 
 const Catalogue = () => {
     return (
-        <CountProvider>
+        // <CountProvider>
             <CatalogueContent />
-        </CountProvider>
+        // </CountProvider>
     )
 }
 
