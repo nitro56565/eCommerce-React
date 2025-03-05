@@ -21,10 +21,10 @@ const Navbar = () => {
 
             <div className='flex-1 flex justify-center h-[24px] md:ml-16'>
                 <div className='flex gap-4 md:gap-[50px] text-center'>
-                    <div className='font-semibold text-base' ><Link to="/" className="no-underline text-black"> Home </Link></div>
+                    <div className='font-semibold text-base' ><Link to="/dashboard" className="no-underline text-black"> Home </Link></div>
                     <div className='font-semibold text-base'><Link to="/shop" className="no-underline text-black">Shop </Link></div>
-                    <div className='font-semibold text-base'><Link to="/" className="no-underline text-black">About </Link></div>
-                    <div className='font-semibold text-base'><Link to="/" className="no-underline text-black">Contact</Link></div>
+                    <div className='font-semibold text-base'><Link to="/dashboard" className="no-underline text-black">About </Link></div>
+                    <div className='font-semibold text-base'><Link to="/dashboard" className="no-underline text-black">Contact</Link></div>
                 </div>
             </div>
 
@@ -36,9 +36,6 @@ const Navbar = () => {
                 </div>
                 <div className='h-[28px]'>
                     <img src='./src/assets/akar-icons_heart.svg' alt='account-icon' />
-                </div>
-                <div className='h-[28px]'>
-                    <img src='./src/assets/akar-icons_search.svg' alt='account-icon' />
                 </div>
                 <div className='h-[28px] cursor-pointer relative' onClick={() => setIsCartOpen(true)}>
                     <img src='./src/assets/ant-design_shopping-cart-outlined.svg' alt='cart-icon' />
