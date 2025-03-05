@@ -19,9 +19,10 @@ export const CountProvider = ({ children }) => {
         });
     };
 
-    const removeFromCart = (id) => {
-        setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const removeFromCart = (idArray) => {
+        setCartItems((prevItems) => prevItems.filter((item) => !idArray.includes(item.id)));
     };
+    
 
     return (
         <CountContext.Provider value={{ cartItems, addToCart, removeFromCart }}>

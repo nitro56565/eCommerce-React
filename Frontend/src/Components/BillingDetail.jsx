@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import useBillingForm from "../hooks/useBillingForm";
-function BillingDetail({ cartItems }) {
+function BillingDetail({ cartItems  }) {
     const [cod, setCod] = useState(false);
     const [bt, setBt] = useState(false);
     const [razorPay, setRazorPay] = useState(false);
 
     const { formData, errors, handleChange, handlePlaceOrder } = useBillingForm();
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const itemName = cartItems.map(item => item.title)
+    const itemName = cartItems.map(item => item.title);
+    const itemId = cartItems.map(item => item.id);
 
     return (<div className="p-4 lg:p-20 md:p-15 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="w-full  p-2 md:p-4 lg:p-6">
@@ -123,7 +124,7 @@ function BillingDetail({ cartItems }) {
                     </div>
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
-                            onClick={() => handlePlaceOrder({totalPrice , razorPay})} >
+                            onClick={() => handlePlaceOrder({totalPrice , razorPay, itemId})} >
                             Place Order
                         </button>
                     </div>

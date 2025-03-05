@@ -8,12 +8,13 @@ const SidebarCart = ({ onClose }) => {
     const handleRedirect = () => {
 
         const checkoutItems = cartItems.map(item => ({
+            id:item.id,
             title: item.title,
             price: (item.price),
             quantity: item.quantity
         }));
 
-        navigate('/checkout', { state: { cart: checkoutItems } });
+        navigate('/checkout', { state: { cart: checkoutItems} });
     };
     return (
         <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-5 overflow-y-auto transition-transform duration-300 ease-in-out z-10">
@@ -35,7 +36,7 @@ const SidebarCart = ({ onClose }) => {
                             className="text-red-500 font-bold px-2 py-1 text-lg"
                             onClick={() => {
                                 // console.log("Removing item:", item.id);
-                                removeFromCart(item.id);
+                                removeFromCart([item.id]);
                             }}
                         >
                             ✖
