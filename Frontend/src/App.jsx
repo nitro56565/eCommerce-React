@@ -14,9 +14,7 @@ import Dashboard from './Components/Dashboard';
 
 
 function App() {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const handleLogin = () => setIsAuthenticated(true);
-
+ 
 
   return (
     <>
@@ -24,8 +22,8 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
-            <Route path="/" element={<Dashboard />}></Route>
-            {/* <Route path="/dashboard" element={isAuthenticated ? <Catalogue /> : <Navigate to="/login" />} ></Route> */}
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/dashboard" element={<Dashboard/>} ></Route>
             <Route path='/shop' element={<Shop />} />
             <Route path='/checkout' element={<CheckOut />} />
        </Routes>
