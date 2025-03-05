@@ -33,7 +33,7 @@ function CheckOut(params) {
     return(<>
     <Navbar/>
     <ImageHeroSection params={"Checkout"}/>
-    <BillingDetail cartItems={cartItems}/>
+    <BillingDetail cartItems={cartItems} />
     <Policies/>
     <Footer/>
     </>);

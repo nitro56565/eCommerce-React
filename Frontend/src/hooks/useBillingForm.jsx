@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { validateForm } from "../utils/formValidation"; 
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useCountContext } from '../hooks/UseCountContext';
 
 const useBillingForm = () => {
+    const { cartItems, removeFromCart } = useCountContext();
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
@@ -13,7 +16,7 @@ const useBillingForm = () => {
         zipCode: "",
         additional: ""
     });
-
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({});
 
 
@@ -25,12 +28,12 @@ const useBillingForm = () => {
 
     // Handle order placement 
 
-    const handlePlaceOrder = async ({ totalPrice, razorPay }) => {
+    const handlePlaceOrder = async ({ totalPrice, razorPay , itemId }) => {
         const validationErrors = validateForm(formData); // Run validation
         setErrors(validationErrors);
 
-        if (Object.keys(validationErrors).length === 0) {
-            if (razorPay) {
+        if (Object.keys(validationErrors).length === 0 && razorPay === true) {
+            
                 //create order 
 
                 try {
@@ -64,7 +67,10 @@ const useBillingForm = () => {
                                 console.log(res.data);
 
                                 if (res.data.success) {
-                                    alert("Order placed successfully! 🎉");
+                                    // alert("Order placed successfully! 🎉");
+                                    navigate('/orderSuccess');
+                                    removeFromCart(itemId);
+                                    
                                 }
                                 else {
                                     alert("Payment Failed");
@@ -97,10 +103,7 @@ const useBillingForm = () => {
 
 
 
-            }
-            else{
-                alert("Please select Payment Mode");
-            }
+            
         }
     };
 
