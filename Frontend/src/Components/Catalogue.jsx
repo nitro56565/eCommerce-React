@@ -37,14 +37,6 @@ const CatalogueContent = () => {
             </div>
 
             <div className='mb-10'>
-                {/* <button type='button'
-                    onClick={() => setIsCartOpen(true)}
-                    className="fixed top-5 right-5 bg-[#FFF9E5] text-black px-4 py-2 rounded-full shadow-lg"
-                >
-                    🛒 {cartItems.length}
-                </button> */}
-
-                {/* {isCartOpen && <SidebarCart cart={cartItems} onClose={() => setIsCartOpen(false)} />} */}
 
                 {selectedProduct ? (
                     <ProductDetails

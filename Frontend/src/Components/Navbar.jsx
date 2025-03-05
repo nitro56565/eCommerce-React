@@ -13,7 +13,7 @@ const Navbar = () => {
     const { cartItems } = useCountContext();
 
     // Check if the current route is '/dashboard'
-    const isDashboard = location.pathname === "/";
+    const isDashboard = location.pathname === "/dashboard";
 
 
     return (
