@@ -62,9 +62,7 @@ const Login = () => {
                     </div>
                     <button type='submit' className='btn bg-light border w-100 rounded-md'>Login</button>
                 </form>
-                {/* <p>Don't Have an Account?</p>
-                <Link to={'/register'} className='btn btn-default border w-100 bg-light rounded-md text-decoration-none'>Register</Link> */}
-            </div>
+                </div>
 
         </div>
     )

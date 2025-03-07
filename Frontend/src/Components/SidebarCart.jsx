@@ -49,13 +49,15 @@ const SidebarCart = ({ onClose }) => {
 
 
 
-            {cartItems.length > 0 && (
+            {cartItems.length > 0 ? (
                 <button className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded"
                     onClick={handleRedirect}>
 
                     Checkout
                 </button>
-            )}
+            ):<button className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded" onClick={()=>handleRedirect && navigate('/shop')}>
+                back to Shop
+                </button>}
         </div>
     );
 };

@@ -4,22 +4,6 @@ import Button from './Button'
 const FirstSection = () => {
     return (
         <>
-        
-
-            {/* <div className='relative w-[50%] h-[400px] flex flex-col justify-end'>
-
-                <img src='./src/assets/Granite square side table 1.svg' className='absolute w-96 h-96' />
-
-                <h1 className='font-semibold text-3xl'>Side Table</h1>
-                <Button />
-            </div>
-            <div className='relative w-[50%] h-[400px] flex flex-col justify-end'>
-
-                <img src='./src/assets/Cloud sofa three seater + ottoman_3 1 (1).svg' className='absolute w-96 h-96' />
-
-                <h1 className='font-semibold text-3xl'>Side Table</h1>
-                <Button />
-            </div> */}
             
 
             <div className='flex flex-col md:flex-row bg-[#FAF4F4] pb-4 lg:pb-0'>

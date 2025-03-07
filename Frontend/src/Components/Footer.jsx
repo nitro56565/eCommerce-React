@@ -25,9 +25,9 @@ function Footer(params) {
                         <div>
                             <h5 className="text-gray-500 font-semibold text-lg mb-3">Help</h5>
                             <ul className="text-gray-500 space-y-2 pl-0">
-                                <li><p  className="hover:text-gray-700">Payment Option</p></li>
-                                <li><p  className="hover:text-gray-700">Returns</p></li>
-                                <li><p  className="hover:text-gray-700">Privacy Policy</p></li>
+                                <li><p  className="text-black">Payment Option</p></li>
+                                <li><p  className="text-black">Returns</p></li>
+                                <li><p  className="text-black">Privacy Policy</p></li>
                             </ul>
                         </div>
                         <div >
