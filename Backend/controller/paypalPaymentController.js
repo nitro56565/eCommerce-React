@@ -1,10 +1,10 @@
-import got from "got";
+
 import axios from 'axios'
 
 const getAccessToken = async () => {
     try {
 
-        const response = await got.post(
+        const response = await axios.post(
             `${process.env.PAYPAL_BASEURL}/v1/oauth2/token`,
             {
                 form: {
@@ -91,10 +91,8 @@ export const createOrderPaypal = async (req, res) => {
         const orderId = response.body.id;
         console.log(orderId)
 
-        // return res.status(200).json({ orderId })
         const { id, status, links } = response.body;
 
-        // Find the payer-action link
         const approvalLink = links.find(link => link.rel === "payer-action")?.href;
 
         if (!approvalLink) {

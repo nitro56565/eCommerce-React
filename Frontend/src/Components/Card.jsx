@@ -1,26 +1,3 @@
-// import React from 'react'
-
-// const Card = ({ product }) => {
-//     return (
-//         <div>
-//             <div className='w-[287px] h-[397px] space-y-4 border'>
-//                 <div className='flex justify-center overflow-hidden'>
-//                     <img src={product.image} alt="" className='object-cover'/>
-//                 </div>
-//                 <div className='w-[199px] p-2 flex flex-col space-y-3   '>
-//                     <p className='font-normal'>{product.title}</p>
-//                     <h2 className='font-semibold text-2xl'>Rs. {product.price}</h2>
-//                 </div>
-//             </div>
-
-
-//         </div>
-//     )
-// }
-
-// export default Card
-
-
 import React from 'react'
 
 

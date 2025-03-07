@@ -20,21 +20,21 @@ const useBillingForm = () => {
     const [errors, setErrors] = useState({});
 
 
-    // Handle input changes
+    
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        setErrors({ ...errors, [e.target.name]: "" }); // Clear error on typing
+        setErrors({ ...errors, [e.target.name]: "" }); 
     };
 
-    // Handle order placement 
+   
 
     const handlePlaceOrder = async ({ totalPrice, razorPay , itemId }) => {
-        const validationErrors = validateForm(formData); // Run validation
+        const validationErrors = validateForm(formData); 
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0 && razorPay === true) {
             
-                //create order 
+                
 
                 try {
                     const options = {
@@ -44,7 +44,7 @@ const useBillingForm = () => {
 
                     const res = await axios.post('http://localhost:3000/api/createOrder', options, { withCredentials: true });
 
-                    const data = res.data; // Now `data` is accessible
+                    const data = res.data; 
                     console.log(data);
 
 
@@ -67,7 +67,7 @@ const useBillingForm = () => {
                                 console.log(res.data);
 
                                 if (res.data.success) {
-                                    // alert("Order placed successfully! 🎉");
+                                    
                                     navigate('/orderSuccess');
                                     removeFromCart(itemId);
                                     

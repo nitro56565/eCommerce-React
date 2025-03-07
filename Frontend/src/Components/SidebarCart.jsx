@@ -35,7 +35,7 @@ const SidebarCart = ({ onClose }) => {
                         <button
                             className="text-red-500 font-bold px-2 py-1 text-lg"
                             onClick={() => {
-                                // console.log("Removing item:", item.id);
+                                
                                 removeFromCart([item.id]);
                             }}
                         >

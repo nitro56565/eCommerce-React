@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegClock } from "react-icons/fa";  // Watch/Timer Icon
+import { FaRegClock } from "react-icons/fa";  
 import { FaRegCalendarAlt } from "react-icons/fa";
 function Blogs() {
     const blogData = [
@@ -37,13 +37,13 @@ function Blogs() {
                         <div className="p-4 text-center">
                             <p className='text-sm'>{blog.title}</p>
 
-                            {/* Button */}
+                           
                             <button
                                 className='pt-4 font-lg font-bold underline decoration-[1px]  decoration-gray-800 underline-offset-[5px]'>
                                 Read More
                             </button>
 
-                            {/* Time & Date in one line */}
+                           
                             <div className="flex align-center gap-3 text-center justify-center mt-3 text-gray-600 text-sm">
                                 <p className="flex items-center gap-1 t">
                                     <FaRegClock className="text-black " /> {blog.time}
