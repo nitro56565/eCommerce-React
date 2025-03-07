@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
+
 import { toast } from "react-hot-toast"
 
 
@@ -15,7 +15,7 @@ const Registration = () => {
         await axios.post('http://localhost:3000/api/register', { name, email, password })
             .then(res => {
                 if (res) {
-                    // navigate('/login')
+                    
                     toast.success("Registration Successful!", { position: "top-right" });
                     setName('');
                     setEmail('');

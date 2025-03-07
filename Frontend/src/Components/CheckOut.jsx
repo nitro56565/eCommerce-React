@@ -6,7 +6,7 @@ import BillingDetail from "./BillingDetail";
 import Policies from "./Policies";
 import Footer from "./Footer";
 import { useLocation } from "react-router-dom";
-// import PayPalButton from "./PayPalButton";
+
 function CheckOut(params) {
 
     const location = useLocation();

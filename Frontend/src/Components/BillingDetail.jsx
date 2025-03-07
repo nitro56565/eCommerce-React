@@ -34,11 +34,11 @@ function BillingDetail({ cartItems  }) {
     const onCreateOrder = async (data, actions) => {
         return actions.order.create({
           purchase_units: [{
-            amount: { value: "100.00" } // Replace with dynamic value
+            amount: { value: "100.00" }
           }]
         }).then(orderId => {
-          console.log("PayPal Order ID:", orderId);  // Debugging
-          return orderId;  // Ensure this is returned
+          console.log("PayPal Order ID:", orderId);  
+          return orderId;
         }).catch(error => {
           console.error("Error creating PayPal order:", error);
         });
@@ -47,10 +47,10 @@ function BillingDetail({ cartItems  }) {
     
 
    const onApprove = async (data, actions) => {
-        console.log("Order Approved, ID:", data.orderID); // Debugging
+        console.log("Order Approved, ID:", data.orderID); 
         return actions.order.capture().then(details => {
           console.log("Transaction completed by:", details.payer.name.given_name);
-        //   saveOrderToDatabase(details.id, details);
+      
         }).catch(error => {
           console.error("Error capturing order:", error);
         });

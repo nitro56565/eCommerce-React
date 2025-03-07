@@ -12,7 +12,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // onLogin();
+        
         await axios.post('http://localhost:3000/api/login', { email, password })
             .then(response => {
                 if (response.data.Login) {
