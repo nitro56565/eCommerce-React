@@ -1,14 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useBillingForm from "../hooks/useBillingForm";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { Layout } from "lucide-react";
 function BillingDetail({ cartItems  }) {
     const [cod, setCod] = useState(false);
     const [bt, setBt] = useState(false);
     const [razorPay, setRazorPay] = useState(false);
+    const [paypal, setPaypal] = useState(false);
+    const [orderID, setOrderID] = useState('')
 
-    const { formData, errors, handleChange, handlePlaceOrder } = useBillingForm();
-    const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const itemName = cartItems.map(item => item.title);
-    const itemId = cartItems.map(item => item.id);
+
+
+    const { formData, errors, handleChange,  handlePlaceOrder } = useBillingForm();
+
+    const [totalPrice, setTotalPrice] = useState(0)
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            setTotalPrice(0);
+        } else {
+            const newTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+            setTotalPrice(newTotal);
+        }
+    }, [cartItems]);
+
+    const styles = {
+        shape: "rect",
+        layout: "vertical"
+    }
+
+   
+
+    const onCreateOrder = async (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: "100.00" } // Replace with dynamic value
+          }]
+        }).then(orderId => {
+          console.log("PayPal Order ID:", orderId);  // Debugging
+          return orderId;  // Ensure this is returned
+        }).catch(error => {
+          console.error("Error creating PayPal order:", error);
+        });
+      }
+
+    
+
+   const onApprove = async (data, actions) => {
+        console.log("Order Approved, ID:", data.orderID); // Debugging
+        return actions.order.capture().then(details => {
+          console.log("Transaction completed by:", details.payer.name.given_name);
+          saveOrderToDatabase(details.id, details);
+        }).catch(error => {
+          console.error("Error capturing order:", error);
+        });
+      }
+    
 
     return (<div className="p-4 lg:p-20 md:p-15 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="w-full  p-2 md:p-4 lg:p-6">
@@ -91,22 +137,24 @@ function BillingDetail({ cartItems  }) {
 
                     <div className="space-y-2">
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true), setBt(false), setUpi(false))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true), setUpi(false), setPaypal(false))} className="form-radio text-blue-500" />
                             <span>Cash on Delivery</span>
 
                         </label>
                         {cod ? <p className="text-gray-500"> You can make your payment after your Order is delivered.</p> : <></>}
+
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="bank" onClick={() => (setCod(false), setBt(true), setUpi(false))} className="form-radio text-blue-500" />
-                            <span>Bank Transfer</span>
+                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false), setUpi(false), setPaypal(false))} className="form-radio text-blue-500" />
+                            <span>PayPal</span>
 
                         </label>
-                        {bt ? <p className="text-gray-500"> Make your payment directly in to our Bank account.
+                        {paypal ? <p className="text-gray-500"> Make your payment directly into our bank account using PayPal.
                             Please use your Order ID as the payment reference.
                             Your order will not be shipped until the funds have
                             cleared in our account.
                         </p> : <></>
                         }
+
                         <label className="flex items-center space-x-2">
                             <input type="radio" name="payment" value="razorPay" onClick={() => (setCod(false), setBt(false), setRazorPay(true))} className="form-radio text-blue-500" />
                             <span>Razor Pay</span>
@@ -117,21 +165,47 @@ function BillingDetail({ cartItems  }) {
                             Please use your Order ID as the payment reference.
                             Your order will not be shipped until the funds have
                             cleared in our account.</p> : <></>}
+                            
+                           
+
+                       
                         <hr />
+
+
                         <p> Your personal data will be used to support your experience
                             throughout this website, to manage access to your account, and
                             for other purposes described in our <span className="font-semibold">Privacy policy.</span></p>
+
+
                     </div>
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
-                            onClick={() => handlePlaceOrder({totalPrice , razorPay, itemId})} >
+
+                            onClick={() => () => {handlePlaceOrder({totalPrice , razorPay, itemId})({ totalPrice});
+                            setPaypal(true);
+                            }}>
                             Place Order
                         </button>
+                       
                     </div>
+                    {paypal  &&(
+                            <div className="mt-4">
+                                <PayPalScriptProvider options={{ "client-id": "AVc0SZHCKIBkiw87_WlKzLXMGJUHKWFBjrvIogVHhGLbG5HBe-hM6eXXRoLCBPD60LH1Km1-MhU02Nkg" }}>
+                                    <PayPalButtons
+                                    style={styles}
+                                    createOrder={onCreateOrder}
+                                    onApprove={onApprove}
+                                    fundingSource="paypal"
+                                        
+                                    />
+                                </PayPalScriptProvider>
+                            </div>
+                            )}
                 </div>
             </div>
         </div>
     </div>
     );
+
 }
 export default BillingDetail;

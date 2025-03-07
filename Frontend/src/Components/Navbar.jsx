@@ -21,10 +21,10 @@ const Navbar = () => {
 
             <div className='flex-1 flex justify-center h-[24px] md:ml-16'>
                 <div className='flex gap-4 md:gap-[50px] text-center'>
-                    <div className='font-semibold text-base' ><Link to="/dashboard" className="no-underline text-black"> Home </Link></div>
-                    <div className='font-semibold text-base'><Link to="/shop" className="no-underline text-black">Shop </Link></div>
-                    <div className='font-semibold text-base'><Link to="/dashboard" className="no-underline text-black">About </Link></div>
-                    <div className='font-semibold text-base'><Link to="/dashboard" className="no-underline text-black">Contact</Link></div>
+                    <div className='font-semibold text-base hover:cursor-pointer' ><Link to="/dashboard" className="no-underline text-black"> Home </Link></div>
+                    <div className='font-semibold text-base hover:cursor-pointer'><Link to="/shop" className="no-underline text-black">Shop </Link></div>
+                    <div className='font-semibold text-base hover:cursor-pointer'><Link to="/dashboard" className="no-underline text-black">About </Link></div>
+                    <div className='font-semibold text-base hover:cursor-pointer'><Link to="/dashboard" className="no-underline text-black">Contact</Link></div>
                 </div>
             </div>
 
@@ -64,8 +64,6 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
-
-            {/* {isCartOpen && <SidebarCart onClose={() => setIsCartOpen(false)} />} */}
 
             {isCartOpen && <SidebarCart cart={cartItems} onClose={() => setIsCartOpen(false)} />}
 
