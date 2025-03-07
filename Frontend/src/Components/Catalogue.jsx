@@ -63,7 +63,7 @@ const CatalogueContent = () => {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             placeholder="Search..."
-                            className="border border-gray-500 bg-white w-[350px] px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 w-48"
+                            className="border border-gray-500 bg-white w-[350px] px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 "
                         />
                     </div>
 

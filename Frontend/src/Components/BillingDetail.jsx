@@ -12,6 +12,7 @@ function BillingDetail({ cartItems  }) {
 
 
     const { formData, errors, handleChange,  handlePlaceOrder } = useBillingForm();
+    const itemId = cartItems.map(item => item.id)
 
     const [totalPrice, setTotalPrice] = useState(0)
     useEffect(() => {
@@ -49,7 +50,7 @@ function BillingDetail({ cartItems  }) {
         console.log("Order Approved, ID:", data.orderID); // Debugging
         return actions.order.capture().then(details => {
           console.log("Transaction completed by:", details.payer.name.given_name);
-          saveOrderToDatabase(details.id, details);
+        //   saveOrderToDatabase(details.id, details);
         }).catch(error => {
           console.error("Error capturing order:", error);
         });
@@ -137,14 +138,14 @@ function BillingDetail({ cartItems  }) {
 
                     <div className="space-y-2">
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true), setUpi(false), setPaypal(false))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true),  setPaypal(false))} className="form-radio text-blue-500" />
                             <span>Cash on Delivery</span>
 
                         </label>
                         {cod ? <p className="text-gray-500"> You can make your payment after your Order is delivered.</p> : <></>}
 
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false), setUpi(false), setPaypal(false))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false),  setPaypal(false))} className="form-radio text-blue-500" />
                             <span>PayPal</span>
 
                         </label>
@@ -181,7 +182,7 @@ function BillingDetail({ cartItems  }) {
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
 
-                            onClick={() => () => {handlePlaceOrder({totalPrice , razorPay, itemId})({ totalPrice});
+                            onClick={() => {handlePlaceOrder({totalPrice , razorPay, itemId});
                             setPaypal(true);
                             }}>
                             Place Order

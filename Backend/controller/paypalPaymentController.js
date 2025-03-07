@@ -1,4 +1,5 @@
 import got from "got";
+import axios from 'axios'
 
 const getAccessToken = async () => {
     try {
@@ -27,7 +28,7 @@ const getAccessToken = async () => {
     }
 };
 
-export const createOrder = async (req, res) => {
+export const createOrderPaypal = async (req, res) => {
     try {
         const {amount} = req.body;
         console.log(amount)
@@ -36,7 +37,7 @@ export const createOrder = async (req, res) => {
         }
         const accessToken = await getAccessToken();
 
-        const response = await got.post(
+        const response = await axios.post(
             `${process.env.PAYPAL_BASEURL}/v2/checkout/orders`,
             {
                 headers: {
@@ -114,7 +115,7 @@ export const captureOrder = async(req,res)=>{
             return res.status(400).json({ success: false, message: "Missing order ID" });
         }
 
-        const response = await got.post(
+        const response = await axios.post(
             `${process.env.PAYPAL_BASEURL}/v2/checkout/orders/${paymentId}/capture`,
             {
                 headers:{
