@@ -2,25 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useCountContext } from '../hooks/UseCountContext';
 
 const ProductDetails = ({ product, onClose }) => {
-    const { addToCart } = useCountContext(); 
+    const { addToCart } = useCountContext();
 
     const [count, setCount] = useState(1);
     const [scrollPosition, setScrollPosition] = useState(0);
 
     useEffect(() => {
-        // Save scroll position before opening the modal
         setScrollPosition(window.scrollY);
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        document.body.style.overflow = "hidden"; 
         return () => {
-            document.body.style.overflow = "auto"; // Restore scrolling when modal closes
+            document.body.style.overflow = "auto"; 
         };
     }, []);
 
     const handleAddToCart = (event) => {
         event.preventDefault();
         addToCart({ ...product, quantity: count });
-
-        // Restore scroll position immediately after closing the modal
         setTimeout(() => {
             window.scrollTo({ top: scrollPosition, behavior: "instant" });
         }, 0);
@@ -29,7 +26,6 @@ const ProductDetails = ({ product, onClose }) => {
     };
 
     const handleClose = () => {
-        // Restore scroll position when closing modal
         setTimeout(() => {
             window.scrollTo({ top: scrollPosition, behavior: "instant" });
         }, 0);
@@ -51,15 +47,15 @@ const ProductDetails = ({ product, onClose }) => {
                         Close
                     </button>
 
-                   
+
                     <div className='border p-2 rounded-full flex items-center'>
                         <button className='px-2' type='button' onClick={() => setCount(prev => Math.max(prev - 1, 1))}>-</button>
                         <span className="px-3">{count}</span>
                         <button className='px-2' type='button' onClick={() => setCount(prev => prev + 1)}>+</button>
                     </div>
 
-                 
-                    <button type='button' onClick={(event) => handleAddToCart(event, product)}  className="px-4 py-2 bg-green-500 text-white rounded">
+
+                    <button type='button' onClick={(event) => handleAddToCart(event, product)} className="px-4 py-2 bg-green-500 text-white rounded">
                         Add to Cart
                     </button>
                 </div>

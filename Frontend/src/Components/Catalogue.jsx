@@ -39,9 +39,11 @@ const CatalogueContent = () => {
         if (!searchValue.trim()) {
             setFilteredData(data); 
         } else {
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             const normalizedSearch = searchValue.replace(/\s+/g, "").toLowerCase();
-
             const results = data.filter(product =>
                 product.title.replace(/\s+/g, "").toLowerCase().includes(normalizedSearch)
             );
@@ -49,20 +51,31 @@ const CatalogueContent = () => {
             setFilteredData(results);
         }
         setPage(1);
+<<<<<<< Updated upstream
     }, [searchValue, data]); 
 
 
 
+=======
+    }, [searchValue, data]);
+>>>>>>> Stashed changes
 
     const handleSort = () => {
         const sortedData = [...data].sort((a, b) =>
             sortOrder === "asc"
+<<<<<<< Updated upstream
                 ? b.title.localeCompare(a.title)  
+=======
+                ? b.title.localeCompare(a.title) 
+>>>>>>> Stashed changes
                 : a.title.localeCompare(b.title) 
         );
-
         setData(sortedData);
+<<<<<<< Updated upstream
         setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+=======
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc"); 
+>>>>>>> Stashed changes
     };
 
 
@@ -77,6 +90,7 @@ const CatalogueContent = () => {
 
     return (
         <>
+<<<<<<< Updated upstream
             
 
 <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-around md:gap-8 items-center  bg-[#FFF9E5] w-[80%] mx-auto mt-4 p-3 shadow-md rounded-lg">
@@ -103,6 +117,24 @@ const CatalogueContent = () => {
     </div>
   </div>
 </div>
+=======
+            <div className="flex-1 flex justify-center items-center h-[40px] font-normal my-4  bg-[#FFF9E5] w-[80%] m-auto p-3 shadow-md rounded-lg">
+                <div className="flex gap-4 md:gap-8 items-center w-full px-4 py-2">
+                    
+                    <div className="flex items-center gap-2">
+                        <img src="./src/assets/akar-icons_search.svg" alt="search-icon" className="w-5 h-5" />
+                        <input
+                            type="text"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="Search..."
+                            className="border border-gray-500 bg-white w-[350px] px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 "
+                        />
+                    </div>
+                    <div className="cursor-pointer flex items-center" onClick={() => handleSort()}>
+                        <BiSort size={27} />
+                    </div>
+>>>>>>> Stashed changes
 
 
             <div className="mb-10">

@@ -10,7 +10,7 @@ const razorpayInstance = createRazorpayInstance();
 export const createOrder = async (req, res) => {
     const { courseId, amount } = req.body;
 
-    console.log("Received createOrder request:", req.body); // Log request data
+    console.log("Received createOrder request:", req.body);
 
     try {
         // Fetch exchange rate from USD to INR
@@ -29,11 +29,11 @@ export const createOrder = async (req, res) => {
         console.log("Razorpay order created:", order); // Log successful order
         res.status(200).json(order);
     } catch (error) {
-        console.error("Razorpay Order Creation Error:", error); // Log full error
+        console.error("Razorpay Order Creation Error:", error); 
         res.status(500).json({
             success: false,
             message: "Something went wrong",
-            error: error.message, // Include error details
+            error: error.message, 
         });
     }
 }

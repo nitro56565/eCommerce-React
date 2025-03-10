@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Shop from './Components/Shop';
 import Home from './Components/Home';
 import CheckOut from './Components/CheckOut';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './Components/ScrollToTop';
 import { CountProvider } from './hooks/UseCountContext';
 import Dashboard from './Components/Dashboard';

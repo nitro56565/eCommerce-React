@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
+=======
+import {  useNavigate } from 'react-router-dom';
+>>>>>>> Stashed changes
 import { toast } from "react-hot-toast"
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -9,8 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState();
     const navigate = useNavigate();
 
-    axios.defaults.withCredentials = true;//This line ensures that cookies, authorization headers, and other credentials are sent along with cross-origin requests.
-
+    axios.defaults.withCredentials = true;
     const handleSubmit = async (e) => {
         e.preventDefault();
         

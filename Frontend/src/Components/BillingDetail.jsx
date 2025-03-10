@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useBillingForm from "../hooks/useBillingForm";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+<<<<<<< Updated upstream
 import { useNavigate } from "react-router-dom";
 import { useCountContext } from "../hooks/UseCountContext";
 import axios from "axios";
@@ -9,10 +10,18 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 
 function BillingDetail() {
+=======
+import { useCountContext } from "../hooks/UseCountContext";
+
+
+function BillingDetail() {
+    
+>>>>>>> Stashed changes
     const { cartItems, removeFromCart } = useCountContext();
     const [cod, setCod] = useState(false);
     const [razorPay, setRazorPay] = useState(false);
     const [paypal, setPaypal] = useState(false);
+<<<<<<< Updated upstream
 
 
 
@@ -21,6 +30,12 @@ function BillingDetail() {
     const itemId = cartItems.map(item => item.id)
     const navigate = useNavigate();
 
+=======
+    const { formData, errors, handleChange, handlePlaceOrder } = useBillingForm();
+    const itemId = cartItems.map(item => item.id);
+
+
+>>>>>>> Stashed changes
     const [totalPrice, setTotalPrice] = useState(0)
     useEffect(() => {
         if (cartItems.length === 0) {
@@ -36,12 +51,19 @@ function BillingDetail() {
         layout: "vertical"
     }
 
+<<<<<<< Updated upstream
 
 
     const onCreateOrder = async (data, actions) => {
         return actions.order.create({
             purchase_units: [{
                 amount: { value: totalPrice }
+=======
+    const onCreateOrder = async (data, actions) => {
+        return actions.order.create({
+            purchase_units: [{
+                amount: { value: "100.00" }
+>>>>>>> Stashed changes
             }]
         }).then(orderId => {
             console.log("PayPal Order ID:", orderId);
@@ -51,12 +73,16 @@ function BillingDetail() {
         });
     }
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
     const onApprove = async (data, actions) => {
         console.log("Order Approved, ID:", data.orderID);
         return actions.order.capture().then(details => {
             console.log("Transaction completed by:", details.payer.name.given_name);
+<<<<<<< Updated upstream
 
 
             const orderData = {
@@ -72,6 +98,10 @@ function BillingDetail() {
             removeFromCart(itemId);
 
 
+=======
+            removeFromCart(itemId);
+
+>>>>>>> Stashed changes
         }).catch(error => {
             console.error("Error capturing order:", error);
         });
@@ -166,7 +196,11 @@ function BillingDetail() {
                         {cod ? <p className="text-gray-500"> You can make your payment after your Order is delivered.</p> : <></>}
 
                         <label className="flex items-center space-x-2">
+<<<<<<< Updated upstream
                             <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false), setRazorPay(false), setPaypal(true))} className="form-radio text-blue-500" />
+=======
+                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false), setRazorPay(false), setPaypal(false))} className="form-radio text-blue-500" />
+>>>>>>> Stashed changes
                             <span>PayPal</span>
 
                         </label>
@@ -188,9 +222,12 @@ function BillingDetail() {
                             Your order will not be shipped until the funds have
                             cleared in our account.</p> : <></>}
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
                         <hr />
 
 
@@ -202,8 +239,12 @@ function BillingDetail() {
                     </div>
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
+<<<<<<< Updated upstream
                             onClick={() => handlePlaceOrder({ totalPrice, razorPay, itemId, cartItems }
                             )} >
+=======
+                            onClick={() => handlePlaceOrder({ totalPrice, razorPay, itemId, cartItems }, setPaypal(true))} >
+>>>>>>> Stashed changes
                             Place Order
                         </button>
 
@@ -216,7 +257,10 @@ function BillingDetail() {
                                     createOrder={onCreateOrder}
                                     onApprove={onApprove}
                                     fundingSource="paypal"
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                                 />
                             </PayPalScriptProvider>
                         </div>

@@ -28,6 +28,10 @@ const Navbar = () => {
     }, []);
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     const isDashboard = location.pathname === "/dashboard";
 
 

@@ -31,10 +31,6 @@ app.use(cookieParser());
 axios.defaults.withCredentials = true;  // ✅ Ensures every request sends cookies
 axios.defaults.baseURL = "http://localhost:3000";
 
-
-
-
-
 dotenv.config();
 const PORT = process.env.PORT;
 const URL = process.env.MONGOURL;
@@ -42,15 +38,11 @@ const URL = process.env.MONGOURL;
 const environment = new paypal.core.SandboxEnvironment(
     process.env.PAYPAL_CLIENT_ID,
     process.env.PAYPAL_SECRET
-  );
+);
 
-  const client = new paypal.core.PayPalHttpClient(environment);
+const client = new paypal.core.PayPalHttpClient(environment);
+mongoose.connect(URL).then(() => {
 
-
-
-
-mongoose.connect(URL).then(()=>{
-    
     console.log("DB connected successfully");
 
     app.listen(PORT, () => {

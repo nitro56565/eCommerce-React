@@ -44,9 +44,6 @@ function Footer(params) {
                                     Subscribe
                                 </button>
                             </div>
-
-
-
                         </div>
                     </div>
                     <div className="border-t mt-8 pt-4 text-left text-gray-500 text-sm">

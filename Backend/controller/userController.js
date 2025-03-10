@@ -133,12 +133,6 @@ export const refreshTokenAPI = async (req, res) => {
 };
 
 
-//to get user_id using email from users table
-
-// export const dashboard = (verifyUser, (req, res) => {
-//     return res.json({ valid: true, message: "authorized" })
-// })
-
 export const getUser = async (req, res) => {
     if (!req.user) {
         return res.status(401).json({ message: "Unauthorized - No valid token" });
