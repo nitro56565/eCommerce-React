@@ -1,36 +1,30 @@
 import { createRazorpayInstance } from "../config/razorpayConfig.js";
 import crypto from 'crypto';
 import dotenv from 'dotenv';
-
+import axios from 'axios';
 dotenv.config();
 
 const razorpayInstance = createRazorpayInstance();
 
-const getExchangeRate = async () => {
-    try {
-        const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
-        return response.data.rates.INR; // Get USD to INR rate
-    } catch (error) {
-        console.error("Error fetching exchange rate:", error);
-        return 83; // Fallback to 1 USD = 83 INR
-    }
-};
 
 export const createOrder = async (req, res) => {
     const { courseId, amount } = req.body;
 
     console.log("Received createOrder request:", req.body); // Log request data
 
-    const exchangeRate = await getExchangeRate();
-    const amountInINR = Math.round(amount * exchangeRate); // Convert USD to INR
-
-    const options = {
-        amount: amountInINR * 100, // Razorpay requires amount in paise
-        currency: "INR",
-        receipt: `receipt_order_${courseId}`,
-    };
-
     try {
+        // Fetch exchange rate from USD to INR
+        const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
+        const INR = response.data.rates.INR;
+        console.log("Exchange Rate (USD to INR):", INR);
+
+        const amountInINR = Math.round(amount * INR); // Convert USD to INR
+
+        const options = {
+            amount: amountInINR * 100, // Razorpay requires amount in paise
+            currency: "INR",
+            receipt: `receipt_order_${courseId}`,
+        };
         const order = await razorpayInstance.orders.create(options);
         console.log("Razorpay order created:", order); // Log successful order
         res.status(200).json(order);
@@ -42,7 +36,8 @@ export const createOrder = async (req, res) => {
             error: error.message, // Include error details
         });
     }
-};
+}
+
 
 
 export const verifyPayment = async (req, res) => {

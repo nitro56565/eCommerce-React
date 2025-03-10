@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Card from '../components/Card';
+import Card from './Card';
 import ProductDetails from './ProductDetails';
 import { useCountContext } from '../hooks/UseCountContext';
 import { BiSort } from "react-icons/bi";
+import useAuth from "../hooks/useAuth"; // ✅ Ensure this import exists
+
 
 const CatalogueContent = () => {
-    const [data, setData] = useState([]); 
-    const [filteredData, setFilteredData] = useState([]); 
+    const [data, setData] = useState([]); // Stores original data
+    const [originalData, setOriginalData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]); // Stores search results
     const [selectedProduct, setSelectedProduct] = useState(null);
     const { cartItems } = useCountContext();
     const [searchValue, setSearchValue] = useState('');
     const [page, setPage] = useState(1);
     const itemsPerPage = 10;
+    const [sortOrder, setSortOrder] = useState("default");
 
+    const user = useAuth();
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products')
-            .then(response => {
-                setData(response.data);
-                setFilteredData(response.data); 
-            })
-            .catch(err => console.log(err));
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get("https://fakestoreapi.com/products"); // ✅ Remove `withCredentials`
+                const sortedData = [...response.data].sort((a, b) => a.title.localeCompare(b.title));
+                setData(sortedData);
+                setFilteredData(sortedData);
+            } catch (error) {
+                console.error("❌ Error fetching products:", error);
+            }
+        };
+        fetchProducts();
+
     }, []);
 
  
     useEffect(() => {
         if (!searchValue.trim()) {
-            setFilteredData(data);
+            setFilteredData(data); // If search is empty, show all data
         } else {
            
             const normalizedSearch = searchValue.replace(/\s+/g, "").toLowerCase();
@@ -37,9 +48,22 @@ const CatalogueContent = () => {
 
             setFilteredData(results);
         }
-    }, [searchValue, data]);
+        setPage(1);
+    }, [searchValue, data]); // ✅ No changes to page state
 
 
+
+
+    const handleSort = () => {
+        const sortedData = [...data].sort((a, b) =>
+            sortOrder === "asc"
+                ? b.title.localeCompare(a.title)  // Sort Descending (Z → A)
+                : a.title.localeCompare(b.title)  // Sort Ascending (A → Z)
+        );
+
+        setData(sortedData);
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc"); // Toggle sorting order
+    };
 
 
     const selectPagehandler = (selectedPage) => {
@@ -67,9 +91,9 @@ const CatalogueContent = () => {
                         />
                     </div>
 
-                    
-                    <div className="cursor-pointer flex items-center">
-                        <BiSort />
+                    {/* Sorting Icon */}
+                    <div className="cursor-pointer flex items-center" onClick={() => handleSort()}>
+                        <BiSort size={27} />
                     </div>
 
                     
@@ -84,13 +108,15 @@ const CatalogueContent = () => {
                     <ProductDetails product={selectedProduct} onClose={() => setSelectedProduct(null)} />
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 mx-5 md:mx-12 mt-10 pb-1">
-                        {filteredData.slice(startItem, endItem).map(product => (
-                            <Card
-                                key={product.id}
-                                product={product}
-                                onClick={() => setSelectedProduct(product)}
-                            />
-                        ))}
+                        {filteredData
+                            .filter((_, index) => index >= startItem && index < endItem) // 🔹 Apply slicing dynamically here
+                            .map(product => (
+                                <Card
+                                    key={product.id}
+                                    product={product}
+                                    onClick={() => setSelectedProduct(product)}
+                                />
+                            ))}
                     </div>
                 )}
 
