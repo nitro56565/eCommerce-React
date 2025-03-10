@@ -1,6 +1,8 @@
 import userModel from "../model/userModel.js";
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 
@@ -31,8 +33,7 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
 
-       
-        if (!user) {
+        if (!user ) {
             return res.json({ Login: false, Message: "No user found" });
         }
 
@@ -41,24 +42,16 @@ export const login = async (req, res) => {
             return res.json({ Login: false, Message: "Invalid password" });
         }
 
-        const accessToken = jwt.sign({ email: email }, 'jwt-access-token-secret-key', { expiresIn: '1m' });
-        const refreshToken = jwt.sign({ email: email }, 'jwt-refresh-token-secret-key', { expiresIn: '5m' });
+        // ✅ Include `user_id` in JWT token payload
+        // ✅ Generate Tokens
+        const accessToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_ACCESS_SECRET, { expiresIn: "1m" });
+        const refreshToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_REFRESH_SECRET, { expiresIn: "7d" });
 
-     
-        res.cookie('accessToken', accessToken, { 
-            maxAge: 60000, 
-            httpOnly: true, 
-            secure: true, 
-            sameSite: 'strict' 
-        });
+        // ✅ Store Tokens in httpOnly Cookies
+        res.cookie("accessToken", accessToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "Lax", maxAge: 60 * 1000 });
+        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "Lax", maxAge: 7 * 24 * 60 * 60 * 1000 });
 
-        res.cookie('refreshToken', refreshToken, { 
-            maxAge: 300000, 
-            httpOnly: true, 
-            secure: true, 
-            sameSite: 'strict' 
-        });
-
+        
         return res.json({ Login: true, Message: "Login successful" });
 
     } catch (err) {
@@ -68,51 +61,87 @@ export const login = async (req, res) => {
 };
 
 
-const verifyUser = (req, res, next) => {
-    const accesstoken = req.cookies.accessToken;
-    if (!accesstoken) {
-        if (renewToken(req, res)) {
-            next()
+
+export const verifyUser = async (req, res, next) => {
+    let accessToken = req.cookies.accessToken;
+
+    if (!accessToken) {
+        console.warn("❌ No Access Token Found! Trying to Refresh...");
+
+        // ✅ Wait for refreshToken to return a new access token
+        const newToken = await renewToken(req, res);
+        if (!newToken) {
+            return res.status(401).json({ valid: false, msg: "Unauthorized - No valid token" });
+        }
+        accessToken = newToken; // ✅ Use the new access token
+    }
+
+    jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
+        if (err) {
+            console.error("❌ Invalid Access Token:", err);
+            return res.status(401).json({ valid: false, msg: "Invalid access token" });
         }
 
-    } else {
-        jwt.verify(accesstoken, 'jwt-access-token-secret-key', (err, decoded) => {
-            if (err) {
-                return res.json({ valid: false, msg: 'invalid token' })
-            } else {
-                req.email = decoded.email;
-                next()
-            }
-        })
+        req.user = { id: decoded.id, email: decoded.email }; // ✅ Attach user info
+        next();
+    });
+};
+
+
+
+const renewToken = async (req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+        console.warn("❌ No Refresh Token Found!");
+        return null;
     }
-}
 
-const renewToken = (req, res) => {
-    const refreshtoken = req.cookies.refreshToken;
-    let exist = false
-    if (!refreshtoken) {
-        return res.json({ valid: false, msg: 'no refresh token' })
+    try {
+        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
 
-    } else {
-        jwt.verify(refreshtoken, 'jwt-refresh-token-secret-key', (err, decoded) => {
-            if (err) {
-                return res.json({ valid: false, msg: 'invalid refresh token' })
-            } else {
-                const accessToken = jwt.sign({ email: decoded.email }, 'jwt-access-token-secret-key', { expiresIn: '1m' })
+        // ✅ Generate a New Access Token
+        const newAccessToken = jwt.sign(
+            { id: decoded.id, email: decoded.email },
+            process.env.JWT_ACCESS_SECRET,
+            { expiresIn: "1m" }
+        );
 
-                res.cookie('accessToken', accessToken, { maxAge: 60000 })
-                
+        // ✅ Send the new token as a cookie
+        res.cookie("accessToken", newAccessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Lax",
+            maxAge: 60 * 1000,
+        });
 
+        return newAccessToken; // ✅ Return the new token so `verifyUser` can use it
 
-            }
-        })
+    } catch (err) {
+        console.error("❌ Refresh Token Expired:", err);
+        return null;
     }
-    exist = true;
-    return exist;
+};
 
-}
 
-export const dashboard = (verifyUser, (req, res) => {
-    return res.json({ valid: true, message: "authorized" })
-})
+export const refreshTokenAPI = async (req, res) => {
+    const newAccessToken = await renewToken(req, res);
+    if (!newAccessToken) {
+        return res.status(403).json({ message: "Unauthorized - Refresh token expired" });
+    }
+    res.status(200).json({ accessToken: newAccessToken });
+};
 
+
+//to get user_id using email from users table
+
+// export const dashboard = (verifyUser, (req, res) => {
+//     return res.json({ valid: true, message: "authorized" })
+// })
+
+export const getUser = async (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized - No valid token" });
+    }
+    res.status(200).json({ user: req.user });
+};

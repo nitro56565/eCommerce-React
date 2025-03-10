@@ -181,10 +181,7 @@ function BillingDetail({ cartItems  }) {
                     </div>
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
-
-                            onClick={() => {handlePlaceOrder({totalPrice , razorPay, itemId});
-                            setPaypal(true);
-                            }}>
+                            onClick={() => handlePlaceOrder({ totalPrice, razorPay, itemId, cartItems })} >
                             Place Order
                         </button>
                        

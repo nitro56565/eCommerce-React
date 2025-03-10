@@ -10,12 +10,13 @@ import ScrollToTop from './Components/ScrollToTop';
 import { CountProvider } from './hooks/UseCountContext';
 import Dashboard from './Components/Dashboard';
 import ThankYouPage from './Components/ThankYouPage';
+import MyOrders from './Components/MyOrders';
 
 
 
 
 function App() {
- 
+
 
   return (
     <>
@@ -24,11 +25,12 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/dashboard" element={<Dashboard/>} ></Route>
+            <Route path="/dashboard" element={<Dashboard />} ></Route>
             <Route path='/shop' element={<Shop />} />
             <Route path='/checkout' element={<CheckOut />} />
-            <Route path='/orderSuccess' element={<ThankYouPage/>}/>
-       </Routes>
+            <Route path='/orderSuccess' element={<ThankYouPage />} />
+            <Route path='/myorders' element={<MyOrders />} />
+          </Routes>
         </BrowserRouter>
       </CountProvider>
 
