@@ -1,11 +1,10 @@
 import React from "react";
-import HeroSection from '../components/HeroSection';
-import MainContent from "../components/MainContent.jsx";
+import HeroSection from '../Components/HeroSection';
+import MainContent from "../Components/MainContent.jsx";
 import Navbar from './Navbar'
 import Footer from './Footer';
 import InstaLink from './InstaLink';
 import Blogs from './Blogs';
-import { useCountContext } from "../hooks/UseCountContext.jsx";
 function Dashboard(params) {
     
 

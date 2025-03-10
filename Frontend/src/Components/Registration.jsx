@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { toast } from "react-hot-toast"
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 const Registration = () => {
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -12,7 +12,7 @@ const Registration = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:3000/api/register', { name, email, password })
+        await axios.post(`${API_URL}/register`, { name, email, password })
             .then(res => {
                 if (res) {
                     

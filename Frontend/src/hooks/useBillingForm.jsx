@@ -86,6 +86,19 @@ const useBillingForm = () => {
                                         navigate('/orderSuccess');
                                         removeFromCart(itemId);
 
+                                        setFormData({
+                                            name: "",
+                                            phone: "",
+                                            email: "",
+                                            country: "",
+                                            address: "",
+                                            city: "",
+                                            zipCode: "",
+                                            additional: ""
+                                        })
+
+                
+
                                     } else {
                                         alert("Payment verification failed. Please try again.");
                                     }
@@ -106,19 +119,27 @@ const useBillingForm = () => {
                 } else {
                     console.warn("Validation failed or user not logged in.");
                 }
-            }catch{(err)=>{
-                console.log(err)
-            }}
-
-            return {
-                formData,
-                errors,
-                handleChange,
-                handlePlaceOrder
-            };
-        };
-    }}
+            } catch {
+                (err) => {
+                    console.log(err)
+                }
+            }
+        }
 
 
-        export default useBillingForm;
-    
+    }
+
+    return {
+        formData,
+        errors,
+        handleChange,
+        handlePlaceOrder
+    };
+};
+
+
+
+
+
+export default useBillingForm;
+

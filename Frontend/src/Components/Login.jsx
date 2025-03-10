@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast"
 
+const API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -13,7 +14,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        await axios.post('http://localhost:3000/api/login', { email, password })
+        await axios.post(`${API_URL}/login`, { email, password })
             .then(response => {
                 if (response.data.Login) {
                     toast.success("Login Successful!", { position: "top-right" });

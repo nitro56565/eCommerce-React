@@ -11,11 +11,11 @@ function MyOrders(params) {
     const [myOrders, setMyOrders] = useState([]);
     useEffect(() => {
         const fetchOrders = async () => {
-            console.log("Fetching orders..."); // ✅ Debug: Ensure this logs in the console
+            console.log("Fetching orders...");
 
             try {
                 const response = await axios.get("http://localhost:3000/api/getUserOrders", { withCredentials: true });
-                console.log("API Response:", response.data); // ✅ Debug: Check API response
+                console.log("API Response:", response.data); 
                 setMyOrders(response.data.userOrders);
             } catch (error) {
                 console.error("Error fetching orders:", error);
