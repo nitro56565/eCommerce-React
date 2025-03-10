@@ -4,13 +4,13 @@ import Card from './Card';
 import ProductDetails from './ProductDetails';
 import { useCountContext } from '../hooks/UseCountContext';
 import { BiSort } from "react-icons/bi";
-import useAuth from "../hooks/useAuth"; // ✅ Ensure this import exists
+import useAuth from "../hooks/useAuth"; 
 
 
 const CatalogueContent = () => {
-    const [data, setData] = useState([]); // Stores original data
+    const [data, setData] = useState([]); 
     const [originalData, setOriginalData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]); // Stores search results
+    const [filteredData, setFilteredData] = useState([]); 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const { cartItems } = useCountContext();
     const [searchValue, setSearchValue] = useState('');
@@ -22,7 +22,7 @@ const CatalogueContent = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://fakestoreapi.com/products"); // ✅ Remove `withCredentials`
+                const response = await axios.get("https://fakestoreapi.com/products"); 
                 const sortedData = [...response.data].sort((a, b) => a.title.localeCompare(b.title));
                 setData(sortedData);
                 setFilteredData(sortedData);
@@ -37,7 +37,7 @@ const CatalogueContent = () => {
 
     useEffect(() => {
         if (!searchValue.trim()) {
-            setFilteredData(data); // If search is empty, show all data
+            setFilteredData(data); 
         } else {
 
             const normalizedSearch = searchValue.replace(/\s+/g, "").toLowerCase();
@@ -49,7 +49,7 @@ const CatalogueContent = () => {
             setFilteredData(results);
         }
         setPage(1);
-    }, [searchValue, data]); // ✅ No changes to page state
+    }, [searchValue, data]); 
 
 
 
@@ -57,12 +57,12 @@ const CatalogueContent = () => {
     const handleSort = () => {
         const sortedData = [...data].sort((a, b) =>
             sortOrder === "asc"
-                ? b.title.localeCompare(a.title)  // Sort Descending (Z → A)
-                : a.title.localeCompare(b.title)  // Sort Ascending (A → Z)
+                ? b.title.localeCompare(a.title)  
+                : a.title.localeCompare(b.title) 
         );
 
         setData(sortedData);
-        setSortOrder(sortOrder === "asc" ? "desc" : "asc"); // Toggle sorting order
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     };
 
 
@@ -111,7 +111,7 @@ const CatalogueContent = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 mx-5 md:mx-12 mt-10 pb-1">
                         {filteredData
-                            .filter((_, index) => index >= startItem && index < endItem) // 🔹 Apply slicing dynamically here
+                            .filter((_, index) => index >= startItem && index < endItem) 
                             .map(product => (
                                 <Card
                                     key={product.id}

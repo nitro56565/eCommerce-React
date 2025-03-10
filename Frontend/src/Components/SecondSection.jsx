@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../components/Card'
+import Card from '../Components/Card'
 import { ProductsData } from '../../public/assets/products'
 import Button from './Button'
 

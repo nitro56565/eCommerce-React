@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import SidebarCart from './SidebarCart';
 import { useCountContext } from '../hooks/UseCountContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ const Navbar = () => {
     const { cartItems } = useCountContext();
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -93,8 +95,10 @@ const Navbar = () => {
             </div>
 
             {isOpen && (
-                <div className='absolute w-full top-20 left-0  bg-[#FBEBB5] p-5 shadow-lg flex flex-col items-center gap-4 md:hidden'>
-                    <div><img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' /></div>
+                <div className='absolute w-full top-20 left-0  bg-[#FBEBB5] p-5 shadow-lg flex flex-col items-center gap-4 md:hidden z-50'>
+                    <div onClick={() => setOpen(!open)}>
+                    
+                        <img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' /></div>
                     <div><img src='./src/assets/akar-icons_heart.svg' alt='account-icon' /></div>
                     <div> <img src='./src/assets/akar-icons_search.svg' alt='account-icon' /></div>
                     <div className='cursor-pointer' onClick={() => setIsCartOpen(true)}>

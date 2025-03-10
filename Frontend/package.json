@@ -12,7 +12,6 @@
   "dependencies": {
     "@paypal/react-paypal-js": "^8.8.2",
     "@tailwindcss/vite": "^4.0.7",
-    "add": "^2.0.6",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "dropdown-menu": "^0.1.1",
@@ -24,7 +23,6 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.2.0",
-    "shadcn": "^2.4.0-canary.12",
     "toaster": "^0.1.2"
   },
   "devDependencies": {

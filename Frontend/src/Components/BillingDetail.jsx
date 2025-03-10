@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import useBillingForm from "../hooks/useBillingForm";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { Layout } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-function BillingDetail({ cartItems  }) {
+import { useCountContext } from "../hooks/UseCountContext";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+
+function BillingDetail() {
+    const { cartItems, removeFromCart } = useCountContext();
     const [cod, setCod] = useState(false);
-    const [bt, setBt] = useState(false);
     const [razorPay, setRazorPay] = useState(false);
     const [paypal, setPaypal] = useState(false);
-    const [orderID, setOrderID] = useState('')
 
 
 
-    const { formData, errors, handleChange,  handlePlaceOrder } = useBillingForm();
+
+    const { formData, errors, handleChange, handlePlaceOrder } = useBillingForm();
     const itemId = cartItems.map(item => item.id)
     const navigate = useNavigate();
 
@@ -31,34 +36,47 @@ function BillingDetail({ cartItems  }) {
         layout: "vertical"
     }
 
-   
+
 
     const onCreateOrder = async (data, actions) => {
         return actions.order.create({
-          purchase_units: [{
-            amount: { value: "100.00" }
-          }]
+            purchase_units: [{
+                amount: { value: totalPrice }
+            }]
         }).then(orderId => {
-          console.log("PayPal Order ID:", orderId);  
-          return orderId;
+            console.log("PayPal Order ID:", orderId);
+            return orderId;
         }).catch(error => {
-          console.error("Error creating PayPal order:", error);
+            console.error("Error creating PayPal order:", error);
         });
-      }
+    }
 
-    
 
-   const onApprove = async (data, actions) => {
-        console.log("Order Approved, ID:", data.orderID); 
+
+    const onApprove = async (data, actions) => {
+        console.log("Order Approved, ID:", data.orderID);
         return actions.order.capture().then(details => {
-          console.log("Transaction completed by:", details.payer.name.given_name);
-          navigate('/orderSuccess');
-      
+            console.log("Transaction completed by:", details.payer.name.given_name);
+
+
+            const orderData = {
+
+                orders: cartItems,
+                paymentStatus: "paid"
+            };
+
+            const orderAdded = axios.post(`${API_URL}/order`, orderData, { withCredentials: true })
+
+            console.log("Order placed successfully!", orderAdded);
+            navigate('/orderSuccess');
+            removeFromCart(itemId);
+
+
         }).catch(error => {
-          console.error("Error capturing order:", error);
+            console.error("Error capturing order:", error);
         });
-      }
-    
+    }
+
 
     return (<div className="p-4 lg:p-20 md:p-15 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="w-full  p-2 md:p-4 lg:p-6">
@@ -141,14 +159,14 @@ function BillingDetail({ cartItems  }) {
 
                     <div className="space-y-2">
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true),  setPaypal(false))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="cod" onClick={() => (setCod(true), setRazorPay(false), setPaypal(false))} className="form-radio text-blue-500" />
                             <span>Cash on Delivery</span>
 
                         </label>
                         {cod ? <p className="text-gray-500"> You can make your payment after your Order is delivered.</p> : <></>}
 
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false),  setPaypal(false))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="paypal" onClick={() => (setCod(false), setRazorPay(false), setPaypal(true))} className="form-radio text-blue-500" />
                             <span>PayPal</span>
 
                         </label>
@@ -160,7 +178,7 @@ function BillingDetail({ cartItems  }) {
                         }
 
                         <label className="flex items-center space-x-2">
-                            <input type="radio" name="payment" value="razorPay" onClick={() => (setCod(false), setBt(false), setRazorPay(true))} className="form-radio text-blue-500" />
+                            <input type="radio" name="payment" value="razorPay" onClick={() => (setCod(false), setPaypal(false), setRazorPay(true))} className="form-radio text-blue-500" />
                             <span>Razor Pay</span>
 
                         </label>
@@ -169,10 +187,10 @@ function BillingDetail({ cartItems  }) {
                             Please use your Order ID as the payment reference.
                             Your order will not be shipped until the funds have
                             cleared in our account.</p> : <></>}
-                            
-                           
 
-                       
+
+
+
                         <hr />
 
 
@@ -184,24 +202,25 @@ function BillingDetail({ cartItems  }) {
                     </div>
                     <div className=" flex justify-center mt-4 align-center ">
                         <button className="border border-black-800 rounded-lg px-10 py-2 shadow-lg hover:shadow-4xl focus:shadow-4xl active:shadow-md transition-all duration-300 ease-in-out"
-                            onClick={() => handlePlaceOrder({ totalPrice, razorPay, itemId, cartItems })} >
+                            onClick={() => handlePlaceOrder({ totalPrice, razorPay, itemId, cartItems }
+                            )} >
                             Place Order
                         </button>
-                       
+
                     </div>
-                    {paypal  &&(
-                            <div className="mt-4">
-                                <PayPalScriptProvider options={{ "client-id": "AVc0SZHCKIBkiw87_WlKzLXMGJUHKWFBjrvIogVHhGLbG5HBe-hM6eXXRoLCBPD60LH1Km1-MhU02Nkg" }}>
-                                    <PayPalButtons
+                    {paypal && (
+                        <div className="mt-4">
+                            <PayPalScriptProvider options={{ "client-id": "AVc0SZHCKIBkiw87_WlKzLXMGJUHKWFBjrvIogVHhGLbG5HBe-hM6eXXRoLCBPD60LH1Km1-MhU02Nkg" }}>
+                                <PayPalButtons
                                     style={styles}
                                     createOrder={onCreateOrder}
                                     onApprove={onApprove}
                                     fundingSource="paypal"
-                                        
-                                    />
-                                </PayPalScriptProvider>
-                            </div>
-                            )}
+
+                                />
+                            </PayPalScriptProvider>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
