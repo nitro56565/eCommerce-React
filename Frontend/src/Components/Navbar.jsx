@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef , useEffect} from 'react'
 import { Menu, X } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import SidebarCart from './SidebarCart';
 import { useCountContext } from '../hooks/UseCountContext';
+
 
 
 const Navbar = () => {
@@ -11,8 +12,20 @@ const Navbar = () => {
     const location = useLocation();
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { cartItems } = useCountContext();
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-   
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+
     const isDashboard = location.pathname === "/dashboard";
 
 
@@ -31,15 +44,40 @@ const Navbar = () => {
 
 
             <div className='hidden md:flex flex-row h-[28px] gap-[40px] mr-[100px] '>
-                <div className='h-[28px]'>
-                    <img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' />
+                
+                <div className="relative" ref={dropdownRef}>
+           
+            <div 
+                className="h-[28px] cursor-pointer flex items-center"
+                onClick={() => setOpen(!open)}
+            >
+                <img src="./src/assets/mdi_account-alert-outline.svg" alt="account-icon" />
+            </div>
+
+           
+            {open && (
+                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border z-50">
+                    <button 
+                        className="block w-full text-left px-4 py-2 text-black hover:bg-white-700 bg-white-500 "
+                        onClick={() => {
+                            navigate("/myorders");
+                            setOpen(false);
+                        }}
+                    >
+                        My Orders
+                    </button>
                 </div>
+            )}
+        </div>
+
+                
+
                 <div className='h-[28px]'>
                     <img src='./src/assets/akar-icons_heart.svg' alt='account-icon' />
                 </div>
                 <div className='h-[28px] cursor-pointer relative' onClick={() => setIsCartOpen(true)}>
                     <img src='./src/assets/ant-design_shopping-cart-outlined.svg' alt='cart-icon' />
-                    
+
                     {cartItems.length > 0 && (
                         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
                             {cartItems.length}
