@@ -34,12 +34,12 @@ const CatalogueContent = () => {
 
     }, []);
 
- 
+
     useEffect(() => {
         if (!searchValue.trim()) {
             setFilteredData(data); // If search is empty, show all data
         } else {
-           
+
             const normalizedSearch = searchValue.replace(/\s+/g, "").toLowerCase();
 
             const results = data.filter(product =>
@@ -77,31 +77,33 @@ const CatalogueContent = () => {
 
     return (
         <>
-            <div className="flex-1 flex justify-center items-center h-[40px] font-normal my-4  bg-[#FFF9E5] w-[80%] m-auto p-3 shadow-md rounded-lg">
-                <div className="flex gap-4 md:gap-8 items-center w-full px-4 py-2">
-                    
-                    <div className="flex items-center gap-2">
-                        <img src="./src/assets/akar-icons_search.svg" alt="search-icon" className="w-5 h-5" />
-                        <input
-                            type="text"
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            placeholder="Search..."
-                            className="border border-gray-500 bg-white w-[350px] px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 "
-                        />
-                    </div>
+            
 
-                    {/* Sorting Icon */}
-                    <div className="cursor-pointer flex items-center" onClick={() => handleSort()}>
-                        <BiSort size={27} />
-                    </div>
+<div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-around md:gap-8 items-center  bg-[#FFF9E5] w-[80%] mx-auto mt-4 p-3 shadow-md rounded-lg">
+  <div className="flex items-center gap-2 w-full md:w-auto">
+    <img
+      src="./src/assets/akar-icons_search.svg"
+      alt="search-icon"
+      className="w-5 h-5"
+    />
+    <input
+      type="text"
+      value={searchValue}
+      onChange={(e) => setSearchValue(e.target.value)}
+      placeholder="Search..."
+      className="border border-gray-500 bg-white px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-auto"
+    />
+    <div className="cursor-pointer flex items-center">
+      <BiSort />
+    </div>
+  </div>
+  <div className="text-gray-700 font-medium w-full md:w-auto text-center md:text-left">
+    <div className="text-sm md:text-base">
+      Showing {startItem + 1} - {endItem} of {filteredData.length} results
+    </div>
+  </div>
+</div>
 
-                    
-                    <div className="text-gray-700 font-medium ml-auto">
-                        Showing {startItem + 1} - {endItem} of {filteredData.length} results
-                    </div>
-                </div>
-            </div>
 
             <div className="mb-10">
                 {selectedProduct ? (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import useBillingForm from "../hooks/useBillingForm";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { Layout } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 function BillingDetail({ cartItems  }) {
     const [cod, setCod] = useState(false);
     const [bt, setBt] = useState(false);
@@ -13,6 +14,7 @@ function BillingDetail({ cartItems  }) {
 
     const { formData, errors, handleChange,  handlePlaceOrder } = useBillingForm();
     const itemId = cartItems.map(item => item.id)
+    const navigate = useNavigate();
 
     const [totalPrice, setTotalPrice] = useState(0)
     useEffect(() => {
@@ -50,6 +52,7 @@ function BillingDetail({ cartItems  }) {
         console.log("Order Approved, ID:", data.orderID); 
         return actions.order.capture().then(details => {
           console.log("Transaction completed by:", details.payer.name.given_name);
+          navigate('/orderSuccess');
       
         }).catch(error => {
           console.error("Error capturing order:", error);
