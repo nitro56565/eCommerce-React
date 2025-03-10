@@ -30,10 +30,10 @@ const getAccessToken = async () => {
 
 export const createOrderPaypal = async (req, res) => {
     try {
-        const {amount} = req.body;
+        const { amount } = req.body;
         console.log(amount)
-        if(!amount){
-            return res.status(400).json({error: "Amount is required"})
+        if (!amount) {
+            return res.status(400).json({ error: "Amount is required" })
         }
         const accessToken = await getAccessToken();
 
@@ -48,29 +48,29 @@ export const createOrderPaypal = async (req, res) => {
                     intent: "CAPTURE",
                     purchase_units: [
                         {
-                          amount: {
-                            currency_code: "USD",
-                            value: amount,
-                            breakdown: {
-                              item_total: {
+                            amount: {
                                 currency_code: "USD",
                                 value: amount,
-                              },
+                                breakdown: {
+                                    item_total: {
+                                        currency_code: "USD",
+                                        value: amount,
+                                    },
+                                },
                             },
-                          },
-                          items: [
-                            {
-                              name: "T-shirt",
-                              quantity: "1",
-                              unit_amount: {
-                                currency_code: "USD",
-                                value: amount,
-                              },
-                            },
-                          ],
+                            items: [
+                                {
+                                    name: "T-shirt",
+                                    quantity: "1",
+                                    unit_amount: {
+                                        currency_code: "USD",
+                                        value: amount,
+                                    },
+                                },
+                            ],
                         },
-                      ],
-                    
+                    ],
+
 
                     payment_source: {
                         paypal: {
@@ -105,8 +105,8 @@ export const createOrderPaypal = async (req, res) => {
     }
 };
 
-export const captureOrder = async(req,res)=>{
-    try{
+export const captureOrder = async (req, res) => {
+    try {
         const accessToken = await getAccessToken();
         const { paymentId } = req.body;
         if (!paymentId) {
@@ -116,19 +116,19 @@ export const captureOrder = async(req,res)=>{
         const response = await axios.post(
             `${process.env.PAYPAL_BASEURL}/v2/checkout/orders/${paymentId}/capture`,
             {
-                headers:{
+                headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${accessToken}`,
                 },
                 responseType: "json",
             }
         );
-        
+
         const paymentData = response.body;
         res.status(200).json(paymentData);
         console.log(paymentData)
-    }catch(err){
-        res.status(500).json({error:"internal server error."})
+    } catch (err) {
+        res.status(500).json({ error: "internal server error." })
     }
 }
 

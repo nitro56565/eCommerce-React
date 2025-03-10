@@ -1,5 +1,5 @@
 import express from 'express';
-import {  login, register ,refreshTokenAPI , verifyUser,getUser } from '../controller/userController.js';
+import {  login, register ,refreshTokenAPI ,verifyUser,getUser } from '../controller/userController.js';
 import {createOrder, verifyPayment} from '../controller/paymentsController.js';
 import { createOrderPaypal, captureOrder } from '../controller/paypalPaymentController.js';
 import {order , getUserOrders} from '../controller/orderController.js';
@@ -11,7 +11,6 @@ route.post('/createOrder', createOrder);
 route.post('/verifyPayment', verifyPayment);
 route.post("/register", register);
 route.post('/login', login);
-// route.get('/dashboard', dashboard);
 route.post('/order',authMiddleware, order);
 route.get('/getUserOrders',authMiddleware, getUserOrders);
 route.post('/refreshToken', refreshTokenAPI);

@@ -4,17 +4,24 @@ import Policies from "./Policies";
 import Footer from "./Footer";
 import ImageHeroSection from './ImageHeroSection';
 import axios from "axios";
-import Card from "./Card";
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function MyOrders(params) {
     const [myOrders, setMyOrders] = useState([]);
     useEffect(() => {
         const fetchOrders = async () => {
+<<<<<<< Updated upstream
             console.log("Fetching orders...");
 
             try {
                 const response = await axios.get("http://localhost:3000/api/getUserOrders", { withCredentials: true });
+=======
+            console.log("Fetching orders..."); 
+
+            try {
+                const response = await axios.get(`${API_URL}/getUserOrders`, { withCredentials: true });
+>>>>>>> Stashed changes
                 console.log("API Response:", response.data); 
                 setMyOrders(response.data.userOrders);
             } catch (error) {

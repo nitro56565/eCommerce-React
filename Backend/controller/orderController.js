@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 
 export const order = async (req, res) => {
     try {
-        // ✅ Extract user_id from the token (sent via middleware)
-        const userId = req.user.id;  // No need to get it from req.body
+        
+        const userId = req.user.id;  
         const { orders , paymentStatus } = req.body;
         // ✅ Create and save the order
         const newOrder = new orderModel({
-            user_id: userId,  // Store user_id automatically
+            user_id: userId,  
             orders: orders,
             paymentStatus: paymentStatus,
             status:"pending"
@@ -28,16 +28,16 @@ export const order = async (req, res) => {
 
 export const getUserOrders = async (req, res) => {
     try {
-        console.log("User ID from JWT:", req.user?.id); // ✅ Log user ID
+        console.log("User ID from JWT:", req.user?.id); 
 
         if (!req.user?.id) {
             return res.status(400).json({ message: "User ID not found in request" });
         }
 
-        const userId = new mongoose.Types.ObjectId(req.user.id); // ✅ Ensure ObjectId conversion
+        const userId = new mongoose.Types.ObjectId(req.user.id); 
 
         const userOrders = await orderModel.find({ user_id: userId }).populate("user_id", "email");
-        console.log("Orders found:", userOrders); // ✅ Debug fetched orders
+        console.log("Orders found:", userOrders); 
 
         res.status(200).json({ userOrders });
     } catch (error) {
