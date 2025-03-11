@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import React, { useState, useRef, useEffect } from 'react'
 import { Menu, X } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import SidebarCart from './SidebarCart';
