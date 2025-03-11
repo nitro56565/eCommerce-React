@@ -9,7 +9,7 @@ const SidebarCart = ({ onClose }) => {
         navigate('/checkout');
     };
     return (
-        <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-5 overflow-y-auto transition-transform duration-300 ease-in-out z-10">
+        <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-lg p-5 overflow-y-auto transition-transform duration-300 ease-in-out z-50">
             <button onClick={onClose} className="absolute top-4 right-4 text-xl">✖</button>
             <h2 className="text-xl font-semibold mb-4">🛒 Cart Items</h2>
 

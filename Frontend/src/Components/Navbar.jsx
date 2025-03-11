@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Menu, X } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import SidebarCart from './SidebarCart';
@@ -58,9 +59,9 @@ const Navbar = () => {
 
 
                     {open && (
-                        <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border z-50">
+                        <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg  z-50">
                             <button
-                                className="block w-full text-left px-4 py-2 text-black hover:bg-white-700 bg-white-500 "
+                                className="block w-full text-left px-4 py-2 text-black hover:bg-gray-500 bg-white "
                                 onClick={() => {
                                     navigate("/myorders");
                                     setOpen(false);
@@ -95,14 +96,34 @@ const Navbar = () => {
             </div>
 
             {isOpen && (
-                <div className='absolute w-full top-20 left-0  bg-[#FBEBB5] p-5 shadow-lg flex flex-col items-center gap-4 md:hidden z-50'>
-                    <div onClick={() => setOpen(!open)}>
+                <div className= {`absolute w-full top-20 left-0  ${isDashboard ? "bg-[#FBEBB5]" :"bg-white"} p-5 shadow-lg flex flex-col items-center gap-4 md:hidden z-10`}>
+                    <div className="relative" ref={dropdownRef}>
+                        <div onClick={() => setOpen(!open)}>
 
-                        <img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' /></div>
+                            <img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' /></div>
+                        {open && (
+                            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg  z-20">
+                                <button
+                                    className="block w-full text-left px-4 py-2 text-black hover:bg-gray-500 bg-white "
+                                    onClick={() => {
+                                        navigate("/myorders");
+                                        setOpen(false);
+                                    }}
+                                >
+                                    My Orders
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <div><img src='./src/assets/akar-icons_heart.svg' alt='account-icon' /></div>
                     <div> <img src='./src/assets/akar-icons_search.svg' alt='account-icon' /></div>
                     <div className='cursor-pointer' onClick={() => setIsCartOpen(true)}>
                         <img src='./src/assets/ant-design_shopping-cart-outlined.svg' alt='cart-icon' />
+                        {cartItems.length > 0 && (
+                        <span className="relative -top-11 -right-4 bg-red-500 text-white text-xs rounded-full px-2">
+                            {cartItems.length}
+                        </span>
+                    )}
                     </div>
                 </div>
             )}
