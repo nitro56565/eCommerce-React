@@ -9,14 +9,15 @@ import paypal from '@paypal/checkout-server-sdk'
 const app = express();
 app.use(express.json());
 
+const cors = require("cors");
+
 app.use(
-    cors({
-        origin: "*", // Allow all origins
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all HTTP methods
-        allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-        credentials: true, // Allow cookies and authorization headers
-    })
+  cors({
+    origin: "https://e-commerce-react-git-main-rutujas-projects-c1e47b7d.vercel.app", 
+    credentials: true, 
+  })
 );
+
 
 app.use(cookieParser());
 
