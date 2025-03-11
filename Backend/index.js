@@ -5,31 +5,20 @@ import route from './routes/userRoute.js';
 import mongoose from 'mongoose';
 import cookieParser from "cookie-parser";
 import paypal from '@paypal/checkout-server-sdk'
-import axios from 'axios';
-
-
-
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
 
 const app = express();
 app.use(express.json());
 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            console.error(`Blocked by CORS: ${origin}`);
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true, // ✅ Allows cookies to be sent
-}));
+app.use(
+    cors({
+        origin: "*", // Allow all origins
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow all HTTP methods
+        allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+        credentials: true, // Allow cookies and authorization headers
+    })
+);
 
 app.use(cookieParser());
-
-axios.defaults.withCredentials = true;  // ✅ Ensures every request sends cookies
-axios.defaults.baseURL = "http://localhost:3000";
 
 dotenv.config();
 const PORT = process.env.PORT;
