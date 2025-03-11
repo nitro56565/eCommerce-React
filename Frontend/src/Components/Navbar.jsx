@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Menu, X } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import SidebarCart from './SidebarCart';
@@ -28,10 +28,6 @@ const Navbar = () => {
     }, []);
 
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     const isDashboard = location.pathname === "/dashboard";
 
 
@@ -50,33 +46,33 @@ const Navbar = () => {
 
 
             <div className='hidden md:flex flex-row h-[28px] gap-[40px] mr-[100px] '>
-                
+
                 <div className="relative" ref={dropdownRef}>
-           
-            <div 
-                className="h-[28px] cursor-pointer flex items-center"
-                onClick={() => setOpen(!open)}
-            >
-                <img src="./src/assets/mdi_account-alert-outline.svg" alt="account-icon" />
-            </div>
 
-           
-            {open && (
-                <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border z-50">
-                    <button 
-                        className="block w-full text-left px-4 py-2 text-black hover:bg-white-700 bg-white-500 "
-                        onClick={() => {
-                            navigate("/myorders");
-                            setOpen(false);
-                        }}
+                    <div
+                        className="h-[28px] cursor-pointer flex items-center"
+                        onClick={() => setOpen(!open)}
                     >
-                        My Orders
-                    </button>
-                </div>
-            )}
-        </div>
+                        <img src="./src/assets/mdi_account-alert-outline.svg" alt="account-icon" />
+                    </div>
 
-                
+
+                    {open && (
+                        <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border z-50">
+                            <button
+                                className="block w-full text-left px-4 py-2 text-black hover:bg-white-700 bg-white-500 "
+                                onClick={() => {
+                                    navigate("/myorders");
+                                    setOpen(false);
+                                }}
+                            >
+                                My Orders
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+
 
                 <div className='h-[28px]'>
                     <img src='./src/assets/akar-icons_heart.svg' alt='account-icon' />
@@ -101,7 +97,7 @@ const Navbar = () => {
             {isOpen && (
                 <div className='absolute w-full top-20 left-0  bg-[#FBEBB5] p-5 shadow-lg flex flex-col items-center gap-4 md:hidden z-50'>
                     <div onClick={() => setOpen(!open)}>
-                    
+
                         <img src='./src/assets/mdi_account-alert-outline.svg' alt='account-icon' /></div>
                     <div><img src='./src/assets/akar-icons_heart.svg' alt='account-icon' /></div>
                     <div> <img src='./src/assets/akar-icons_search.svg' alt='account-icon' /></div>

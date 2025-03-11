@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
-=======
-import {  useNavigate } from 'react-router-dom';
->>>>>>> Stashed changes
 import { toast } from "react-hot-toast"
 
 const API_URL = import.meta.env.VITE_API_URL;
