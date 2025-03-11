@@ -4,15 +4,13 @@ import Card from './Card';
 import ProductDetails from './ProductDetails';
 import { useCountContext } from '../hooks/UseCountContext';
 import { BiSort } from "react-icons/bi";
-import useAuth from "../hooks/useAuth"; 
+import useAuth from "../hooks/useAuth";
 
 
 const CatalogueContent = () => {
-    const [data, setData] = useState([]); 
-    const [originalData, setOriginalData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]); 
+    const [data, setData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const { cartItems } = useCountContext();
     const [searchValue, setSearchValue] = useState('');
     const [page, setPage] = useState(1);
     const itemsPerPage = 10;
@@ -22,7 +20,7 @@ const CatalogueContent = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://fakestoreapi.com/products"); 
+                const response = await axios.get("https://fakestoreapi.com/products");
                 const sortedData = [...response.data].sort((a, b) => a.title.localeCompare(b.title));
                 setData(sortedData);
                 setFilteredData(sortedData);
@@ -37,12 +35,8 @@ const CatalogueContent = () => {
 
     useEffect(() => {
         if (!searchValue.trim()) {
-            setFilteredData(data); 
+            setFilteredData(data);
         } else {
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
             const normalizedSearch = searchValue.replace(/\s+/g, "").toLowerCase();
             const results = data.filter(product =>
                 product.title.replace(/\s+/g, "").toLowerCase().includes(normalizedSearch)
@@ -51,31 +45,19 @@ const CatalogueContent = () => {
             setFilteredData(results);
         }
         setPage(1);
-<<<<<<< Updated upstream
-    }, [searchValue, data]); 
-
-
-
-=======
     }, [searchValue, data]);
->>>>>>> Stashed changes
+
+
+
 
     const handleSort = () => {
         const sortedData = [...data].sort((a, b) =>
             sortOrder === "asc"
-<<<<<<< Updated upstream
-                ? b.title.localeCompare(a.title)  
-=======
-                ? b.title.localeCompare(a.title) 
->>>>>>> Stashed changes
-                : a.title.localeCompare(b.title) 
+                ? b.title.localeCompare(a.title)
+                : a.title.localeCompare(b.title)
         );
         setData(sortedData);
-<<<<<<< Updated upstream
         setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-=======
-        setSortOrder(sortOrder === "asc" ? "desc" : "asc"); 
->>>>>>> Stashed changes
     };
 
 
@@ -90,51 +72,33 @@ const CatalogueContent = () => {
 
     return (
         <>
-<<<<<<< Updated upstream
-            
 
-<div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-around md:gap-8 items-center  bg-[#FFF9E5] w-[80%] mx-auto mt-4 p-3 shadow-md rounded-lg">
-  <div className="flex items-center gap-2 w-full md:w-auto">
-    <img
-      src="./src/assets/akar-icons_search.svg"
-      alt="search-icon"
-      className="w-5 h-5"
-    />
-    <input
-      type="text"
-      value={searchValue}
-      onChange={(e) => setSearchValue(e.target.value)}
-      placeholder="Search..."
-      className="border border-gray-500 bg-white px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-auto"
-    />
-    <div className="cursor-pointer flex items-center">
-      <BiSort />
-    </div>
-  </div>
-  <div className="text-gray-700 font-medium w-full md:w-auto text-center md:text-left">
-    <div className="text-sm md:text-base">
-      Showing {startItem + 1} - {endItem} of {filteredData.length} results
-    </div>
-  </div>
-</div>
-=======
-            <div className="flex-1 flex justify-center items-center h-[40px] font-normal my-4  bg-[#FFF9E5] w-[80%] m-auto p-3 shadow-md rounded-lg">
-                <div className="flex gap-4 md:gap-8 items-center w-full px-4 py-2">
-                    
-                    <div className="flex items-center gap-2">
-                        <img src="./src/assets/akar-icons_search.svg" alt="search-icon" className="w-5 h-5" />
-                        <input
-                            type="text"
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            placeholder="Search..."
-                            className="border border-gray-500 bg-white w-[350px] px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 "
-                        />
-                    </div>
+
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-around md:gap-8 items-center  bg-[#FFF9E5] w-[80%] mx-auto mt-4 p-3 shadow-md rounded-lg">
+                <div className="flex items-center gap-2 w-full md:w-auto">
+                    <img
+                        src="./src/assets/akar-icons_search.svg"
+                        alt="search-icon"
+                        className="w-5 h-5"
+                    />
+                    <input
+                        type="text"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        placeholder="Search..."
+                        className="border border-gray-500 bg-white px-3 py-1 rounded-full outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-auto"
+                    />
                     <div className="cursor-pointer flex items-center" onClick={() => handleSort()}>
                         <BiSort size={27} />
                     </div>
->>>>>>> Stashed changes
+                </div>
+                <div className="text-gray-700 font-medium w-full md:w-auto text-center md:text-left">
+                    <div className="text-sm md:text-base">
+                        Showing {startItem + 1} - {endItem} of {filteredData.length} results
+                    </div>
+                </div>
+            </div>
+
 
 
             <div className="mb-10">
@@ -143,7 +107,7 @@ const CatalogueContent = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-4 mx-5 md:mx-12 mt-10 pb-1">
                         {filteredData
-                            .filter((_, index) => index >= startItem && index < endItem) 
+                            .filter((_, index) => index >= startItem && index < endItem)
                             .map(product => (
                                 <Card
                                     key={product.id}

@@ -6,10 +6,6 @@ const SidebarCart = ({ onClose }) => {
     const { cartItems, removeFromCart } = useCountContext();
     const navigate = useNavigate();
     const handleRedirect = () => {
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         navigate('/checkout');
     };
     return (
