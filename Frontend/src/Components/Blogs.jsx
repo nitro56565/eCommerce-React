@@ -1,25 +1,22 @@
 import React from 'react';
 import { FaRegClock } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import firstImage from '../assets/instalinkfirst.jpg';
-import secondImage from '../assets/instalinksecond.jpg';
-import thirdImage from '../assets/74d9976eaa2789b598b2896a0149302a.jpg';
 function Blogs() {
     const blogData = [
         {
-            img: firstImage,
+            img: "/Rectangle 13.png",
             title: "Going all-in with millennial design",
             time: "5 min",
             date: "12th Oct 2022",
         },
         {
-            img: secondImage,
+            img: "/Rectangle 14.png",
             title: "Going all-in with millennial design",
             time: "7 min",
             date: "15th Nov 2022",
         },
         {
-            img:   thirdImage,
+            img: "/Rectangle 15.png",
             title: "Going all-in with millennial design",
             time: "6 min",
             date: "20th Dec 2022",

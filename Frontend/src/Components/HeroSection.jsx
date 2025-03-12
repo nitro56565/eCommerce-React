@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from './Button'
-
 const HeroSection = () => {
   return (
     <div className='bg-[#FBEBB5] flex-col-reverse flex md:flex-row px-12 pb-3 md:pb-0'>
@@ -11,7 +10,7 @@ const HeroSection = () => {
             </div>
         </div>
         <div className=''>
-            <img src='./src/assets/Rocket single seater 1.svg'/>
+            <img src='/Rocket single seater 1.png'/>
         </div>
 
     </div>

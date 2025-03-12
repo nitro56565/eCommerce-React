@@ -1,5 +1,4 @@
 import React from 'react';
-import backgroundImage from '../assets/blogs.jpg';
 function InstaLink(params) {
     return (
 
@@ -7,7 +6,7 @@ function InstaLink(params) {
 
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: backgroundImage }}
+                style={{ backgroundImage: `url("/InstaLink.png")` }}
             ></div>
             <div className="absolute inset-0 bg-[#FAF4F4] opacity-50"></div>
 
