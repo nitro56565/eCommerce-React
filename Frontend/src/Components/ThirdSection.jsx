@@ -4,7 +4,7 @@ const ThirdSection = () => {
   return (
     <div className='flex flex-col md:flex-row bg-[#FFF9E5] mt-8'>
         <div className='w-[300px] h-[300px] md:w-[800px] md:h-[639px] '>
-            <img src="./src/assets/Asgaard sofa 1.svg" alt="" className=''/>
+            <img src='/Asgaard sofa 1.png' alt="" className=''/>
         </div>
         <div className='flex flex-col justify-center items-center md:ml-12'>
             <h3 className='font-semibold text-xl md:text-2xl'>New Arrivals</h3>

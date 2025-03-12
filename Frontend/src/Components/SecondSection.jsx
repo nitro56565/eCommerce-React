@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../Components/Card'
-import { ProductsData } from '../../public/assets/products'
+import { ProductsData } from '../../public/assets/products.js'
 import Button from '../Components/Button'
 
 const SecondSection = () => {

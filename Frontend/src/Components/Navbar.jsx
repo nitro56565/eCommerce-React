@@ -53,7 +53,7 @@ const Navbar = () => {
                         className="h-[28px] cursor-pointer flex items-center"
                         onClick={() => setOpen(!open)}
                     >
-                        <img src="./src/assets/mdi_account-alert-outline.jpg" alt="account-icon" />
+                        <img src='/mdi_account-alert-outline.png' alt="account-icon" />
                     </div>
 
 
@@ -75,10 +75,10 @@ const Navbar = () => {
 
 
                 <div className='h-[28px]'>
-                    <img src='./src/assets/akar-icons_heart.jpg' alt='account-icon' />
+                    <img src='/akar-icons_heart.png' alt='account-icon' />
                 </div>
                 <div className='h-[28px] cursor-pointer relative' onClick={() => setIsCartOpen(true)}>
-                    <img src='./src/assets/ant-design_shopping-cart-outlined.jpg' alt='cart-icon' />
+                    <img src='/ant-design_shopping-cart-outlined.png' alt='cart-icon' />
 
                     {cartItems.length > 0 && (
                         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">
@@ -99,7 +99,7 @@ const Navbar = () => {
                     <div className="relative" ref={dropdownRef}>
                         <div onClick={() => setOpen(!open)}>
 
-                            <img src='./src/assets/mdi_account-alert-outline.jpg' alt='account-icon' /></div>
+                            <img src='/mdi_account-alert-outline.png' alt='account-icon' /></div>
                         {open && (
                             <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg  z-20">
                                 <button
@@ -114,10 +114,9 @@ const Navbar = () => {
                             </div>
                         )}
                     </div>
-                    <div><img src='./src/assets/akar-icons_heart.jpg' alt='account-icon' /></div>
-                    <div> <img src='./src/assets/akar-icons_search.jpg' alt='account-icon' /></div>
+                    <div><img src='./akar-icons_heart.png' alt='account-icon' /></div>
                     <div className='cursor-pointer' onClick={() => setIsCartOpen(true)}>
-                        <img src='./src/assets/ant-design_shopping-cart-outlined.jpg' alt='cart-icon' />
+                        <img src='/ant-design_shopping-cart-outlined.png' alt='cart-icon' />
                         {cartItems.length > 0 && (
                         <span className="relative -top-11 -right-4 bg-red-500 text-white text-xs rounded-full px-2">
                             {cartItems.length}
