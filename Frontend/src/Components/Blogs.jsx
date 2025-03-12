@@ -4,19 +4,19 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 function Blogs() {
     const blogData = [
         {
-            img: "/Rectangle 13.png",
+            img: "/Rectangle.png",
             title: "Going all-in with millennial design",
             time: "5 min",
             date: "12th Oct 2022",
         },
         {
-            img: "/Rectangle 14.png",
+            img: "/RectangleTwo.png",
             title: "Going all-in with millennial design",
             time: "7 min",
             date: "15th Nov 2022",
         },
         {
-            img: "/Rectangle 15.png",
+            img: "/RectangleThree.png",
             title: "Going all-in with millennial design",
             time: "6 min",
             date: "20th Dec 2022",

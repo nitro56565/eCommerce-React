@@ -1,7 +1,7 @@
 import React from 'react'
-import Login from './Login'
-import Registration from './Registration'
-import Policies from './Policies'
+import Login from '../Components/Login'
+import Registration from '../Components/Registration'
+import Policies from '../Components/Policies'
 
 const Home = () => {
 

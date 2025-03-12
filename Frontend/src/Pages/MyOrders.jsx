@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Navbar from "./Navbar";
-import Policies from "./Policies";
-import Footer from "./Footer";
-import ImageHeroSection from './ImageHeroSection';
+import Navbar from "../Components/Navbar";
+import Policies from "../Components/Policies";
+import Footer from "../Components/Footer";
+import ImageHeroSection from '../Components/ImageHeroSection';
 import axios from "axios";
 import { useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
