@@ -76,7 +76,7 @@ const CatalogueContent = () => {
             <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-around md:gap-8 items-center  bg-[#FFF9E5] w-[80%] mx-auto mt-4 p-3 shadow-md rounded-lg">
                 <div className="flex items-center gap-2 w-full md:w-auto">
                     <img
-                        src="/akar-icons_search.png"
+                        src="/AkarIconsSearch.png"
                         alt="search-icon"
                         className="w-5 h-5"
                     />

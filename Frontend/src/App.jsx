@@ -1,15 +1,15 @@
 import './App.css'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Shop from './Components/Shop';
-import Home from './Components/Home';
-import CheckOut from './Components/CheckOut';
+import Shop from './Pages/Shop';
+import Home from './Pages/Home';
+import CheckOut from './Pages/CheckOut';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ScrollToTop from './Components/ScrollToTop';
 import { CountProvider } from './hooks/UseCountContext';
-import Dashboard from './Components/Dashboard';
-import ThankYouPage from './Components/ThankYouPage';
-import MyOrders from './Components/MyOrders';
+import Dashboard from './Pages/Dashboard';
+import ThankYouPage from './Pages/ThankYouPage';
+import MyOrders from './Pages/MyOrders';
 
 
 

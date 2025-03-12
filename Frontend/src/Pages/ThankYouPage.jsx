@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Policies from "./Policies";
-import Footer from "./Footer";
+import Navbar from "../Components/Navbar";
+import Policies from "../Components/Policies";
+import Footer from "../Components/Footer";
 const ThankYouPage = () => {
     return (<>
         <Navbar/>

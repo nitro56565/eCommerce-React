@@ -1,10 +1,10 @@
 "use client"
 import React, { useEffect } from "react";
-import Navbar from "./Navbar";
-import ImageHeroSection from "./ImageHeroSection";
-import BillingDetail from "./BillingDetail";
-import Policies from "./Policies";
-import Footer from "./Footer";
+import Navbar from "../Components/Navbar";
+import ImageHeroSection from "../Components/ImageHeroSection";
+import BillingDetail from "../Components/BillingDetail";
+import Policies from "../Components/Policies";
+import Footer from "../Components/Footer";
 import { useLocation } from "react-router-dom";
 
 function CheckOut(params) {
