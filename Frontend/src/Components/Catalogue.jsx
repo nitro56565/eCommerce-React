@@ -19,7 +19,7 @@ const CatalogueContent = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://fakestoreapi.com/products");
+                const response = await axios.get("https://cors-anywhere.herokuapp.com/https://fakestoreapi.com/products");
                 const sortedData = [...response.data].sort((a, b) => a.title.localeCompare(b.title));
                 setData(sortedData);
                 setFilteredData(sortedData);
