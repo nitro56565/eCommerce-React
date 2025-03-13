@@ -14,12 +14,12 @@ const CatalogueContent = () => {
     const [page, setPage] = useState(1);
     const itemsPerPage = 10;
     const [sortOrder, setSortOrder] = useState("default");
-
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
     const user = useAuth();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get("https://cors-anywhere.herokuapp.com/https://fakestoreapi.com/products");
+                const response = await axios.get(`${VITE_API_URL}/products`);
                 const sortedData = [...response.data].sort((a, b) => a.title.localeCompare(b.title));
                 setData(sortedData);
                 setFilteredData(sortedData);
