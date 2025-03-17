@@ -8,7 +8,7 @@ const ThankYouPage = () => {
         <div className="flex flex-col items-center justify-center min-h-screen bg-[#FFF9E5] p-6">
             <div className="bg-white shadow-lg rounded-lg p-8 text-center max-w-md">
                 <svg
-                    className="w-16 h-16 text-green-500  mb-4"
+                    className="w-16 h-16 text-green-500 m-auto mb-4"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
