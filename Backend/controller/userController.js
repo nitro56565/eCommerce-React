@@ -33,7 +33,7 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
 
-        if (!user ) {
+        if (!user) {
             return res.json({ Login: false, Message: "No user found" });
         }
 
@@ -48,10 +48,21 @@ export const login = async (req, res) => {
         const refreshToken = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_REFRESH_SECRET, { expiresIn: "7d" });
 
         // ✅ Store Tokens in httpOnly Cookies
-        res.cookie("accessToken", accessToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "Lax", maxAge: 60 * 1000 });
-        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "Lax", maxAge: 7 * 24 * 60 * 60 * 1000 });
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            secure: true, 
+            sameSite: "None", 
+            maxAge: 60 * 1000, 
+        });
 
-        
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
+        });
+
+
         return res.json({ Login: true, Message: "Login successful" });
 
     } catch (err) {
